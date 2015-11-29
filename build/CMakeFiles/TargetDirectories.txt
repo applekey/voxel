@@ -1,0 +1,3 @@
+/Users/applekey/Documents/voxel/build/CMakeFiles/ALL_BUILD.dir
+/Users/applekey/Documents/voxel/build/CMakeFiles/voxel.dir
+/Users/applekey/Documents/voxel/build/CMakeFiles/ZERO_CHECK.dir
