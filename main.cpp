@@ -107,14 +107,22 @@ int isPowerOfTwo (unsigned int x)
 
 /*------------------------------main functions --------------------*/
 struct voxelOperator {
-    const glm::vec3 * voxelSize;
+    glm::vec3 voxelSize;
     std::vector<glm::vec3> * triangles;
     unsigned char * storage;
     glm::vec3 aabbLow;
     glm::vec3 aabbHigh;
-    float aabbXRun;
-    float aabbYRun;
-    float aabbZRun;
+    glm::vec3 aabbRun;
+    
+    //return 1 = x, 2 = y, 3 = z
+    int largestAxis(float x, float y, float z) const
+    {
+        float max = fmax(x,fmax(y,z));
+        if(max == x) return 1; // x
+        if(max == y) return 2; // y
+        if(max == z) return 3; // z
+        return -1;
+    }
     
     struct aabb
     {
@@ -137,17 +145,71 @@ struct voxelOperator {
         return cd;
     }
     
-    int min(int x, int y) const
+    struct aabb convertToScreenSpace(struct aabb vec, glm::vec3 aabbLower, glm::vec3 aabbRun) const
     {
-        return  y + ((x - y) & ((x - y) >>
-                                (sizeof(int) * CHAR_BIT - 1)));
+        // find the lower
+        struct aabb screenIndex;
+        screenIndex.lower.x = int((vec.lower.x - aabbLower.x)/(aabbRun.x) * voxelSize.x);
+        screenIndex.lower.y = int((vec.lower.y - aabbLower.y)/(aabbRun.y) * voxelSize.y);
+        screenIndex.lower.z = int((vec.lower.z - aabbLower.z)/(aabbRun.z) * voxelSize.z);
+        
+        //find upper
+        screenIndex.upper.x = int((vec.upper.x - aabbLower.x)/(aabbRun.x) * voxelSize.x);
+        screenIndex.upper.y = int((vec.upper.y - aabbLower.y)/(aabbRun.y) * voxelSize.y);
+        screenIndex.upper.z = int((vec.upper.z - aabbLower.z)/(aabbRun.z) * voxelSize.z);
+        
+        return screenIndex;
     }
     
-    int largestAxis(float x, float y, float z) const
-    {
-        return fmin(fabs(x), fmax(fabs(y), fabs(z)));
+    bool rayIntersectsTriangle(glm::vec3 p, glm::vec3 d,
+                              glm::vec3 v0, glm::vec3 v1, glm::vec3 v2) {
+        
+        glm::vec3 e1 = v1 - v0;
+        glm::vec3 e2 = v2 - v0;
+        glm::vec3 h = glm::cross(d, e2);
+        
+        // (D x E2) dot E1
+ 
+        float a = glm::dot(e1,h);
+        
+        if (a > -0.00001 && a < 0.00001)
+        {
+            return false;
+        }
+        
+        // 1/ ((D x E2) dot E1)
+        float f = 1/a;
+        
+        glm::vec3 s = p - v0; //T
+        
+        float u = f * (glm::dot(s,h)); // D x E2 dot T
+        
+        if (u < 0.0 || u > 1.0)
+        {
+            return false;
+        }
+        
+        glm::vec3 q = glm::cross(s,e1);
+        float v = f * glm::dot(d,q);
+        
+        if (v < 0.0 || u + v > 1.0)
+        {
+            return false;
+        }
+        
+        // at this stage we can compute t to find out where
+        // the intersection point is on the line
+        float t = f * glm::dot(e2,q);
+        
+        if (t > 0.00001)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
-    
     
     void TriangleRasterizer(glm::vec3 vert1,glm::vec3 vert2,glm::vec3 vert3, unsigned char * output) const
     {
@@ -155,9 +217,42 @@ struct voxelOperator {
         
         struct aabb triaabb = calculateBoundingBox(vert1,vert2,vert3);
         // conver to screen space
+        glm::vec3 distance;
+        struct aabb screenCords = convertToScreenSpace(triaabb,aabbLow,aabbRun);
+        
+        //find the largest axis
+        glm::vec3 normal = glm::normalize(glm::cross(vert3 - vert1, vert2 - vert1));
+        int projectionAxis = largestAxis(normal.x,normal.y,normal.z);
+        
+        int uStart = 0, uEnd = 0, vStart = 0,vEnd = 0;
+        if (projectionAxis == 1) {uStart = screenCords.lower.z; uEnd = screenCords.lower.z; vStart = screenCords.lower.z; vEnd = screenCords.lower.z;};
+        if (projectionAxis == 2) {uStart = screenCords.lower.z; uEnd = screenCords.lower.z; vStart = screenCords.lower.z; vEnd = screenCords.lower.z;};
+        if (projectionAxis == 3) {uStart = screenCords.lower.z; uEnd = screenCords.lower.z; vStart = screenCords.lower.z; vEnd = screenCords.lower.z;};
         
         
+        for( int u = uStart ;u<uEnd;u++)
+        {
+            for(int v = vStart;v < vEnd ; v++)
+            {
+                
+            }
+        }
         
+        
+        for(int k = screenCords.lower.z; k<=screenCords.upper.z;k++)
+        {
+            for(int j = screenCords.lower.y; j<=screenCords.upper.y;j++)
+            {
+                for(int x = screenCords.lower.x; x<=screenCords.upper.x; x++)
+                {
+                    // rasterize the triangle
+                    assert(screenCords.upper.x >=  screenCords.lower.x
+                           && screenCords.upper.y >=  screenCords.lower.y
+                           && screenCords.upper.z >=  screenCords.lower.z);
+                    
+                }
+            }
+        }
     }
     
     
@@ -173,12 +268,7 @@ struct voxelOperator {
             
             TriangleRasterizer(vert1,vert2,vert3,storage);
             
-            // find the max area
-//            glm::vec3 normal = glm::normalize(glm::cross(vert3 - vert1, vert2 - vert1));
-//            int projectionAxis = largestAxis(normal.x,normal.y,normal.z);
-            
-            //rasterize the triangle
-            
+
             
             
             
@@ -205,13 +295,11 @@ int main()
     std::vector<glm::vec3> triangles = LoadObjFindAABB(OBJFILE, &aabbLow,&aabbHigh);
     struct voxelOperator vop;
     vop.triangles = &triangles;
-    vop.voxelSize = &screenSize;
+    vop.voxelSize = screenSize;
     vop.storage = output;
     vop.aabbLow = aabbLow;
     vop.aabbHigh = aabbHigh;
-    vop.aabbXRun = aabbHigh.x - aabbLow.x;
-    vop.aabbYRun = aabbHigh.y - aabbLow.y;
-    vop.aabbZRun = aabbHigh.z - aabbLow.z;
+    vop.aabbRun = glm::vec3( aabbHigh.x - aabbLow.x, aabbHigh.y - aabbLow.y, aabbHigh.z - aabbLow.z);
     
     tbb::parallel_for( tbb::blocked_range<int>( 1, triangles.size()/3 ), vop );
     
