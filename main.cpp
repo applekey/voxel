@@ -145,7 +145,7 @@ struct voxelOperator {
         return cd;
     }
     
-    struct aabb convertToScreenSpace(struct aabb vec, glm::vec3 aabbLower, glm::vec3 aabbRun) const
+    struct aabb convertToScreenSpace(struct aabb vec, glm::vec3 aabbLower, glm::vec3 aabbRun, glm::vec3 voxelSize) const
     {
         // find the lower
         struct aabb screenIndex;
@@ -161,8 +161,35 @@ struct voxelOperator {
         return screenIndex;
     }
     
-    bool rayIntersectsTriangle(glm::vec3 p, glm::vec3 d,
-                              glm::vec3 v0, glm::vec3 v1, glm::vec3 v2) {
+    glm::vec3 convertIndexToCoords(glm::vec3 index, glm::vec3 aabbLower, glm::vec3 aabbRun, glm::vec3 voxelSize) const
+    {
+        //floating points per voxel
+        glm::vec3 voxelLenghts = glm::vec3(aabbRun.x/voxelSize.x,aabbRun.y/voxelSize.y,aabbRun.z/voxelSize.z);
+        
+        return aabbLower + index * voxelLenghts;
+    }
+    
+    glm::vec3 convertCoordToIndex(glm::vec3 coord, glm::vec3 aabbLower, glm::vec3 aabbRun, glm::vec3 voxelSize) const
+    {
+        //convert x
+        glm::vec3 indexCoords;
+        indexCoords.x = int((coord.x - aabbLower.x)/(aabbRun.x) * voxelSize.x);
+        indexCoords.y = int((coord.y - aabbLower.y)/(aabbRun.y) * voxelSize.y);
+        indexCoords.z = int((coord.z - aabbLower.z)/(aabbRun.z) * voxelSize.z);
+        return indexCoords;
+    }
+    
+    void MarkOutputVoxel(glm::vec3 voxel, glm::vec3 voxelSize) const
+    {
+        assert(voxel.x < voxelSize.x
+              && voxel.y < voxelSize.y
+               && voxel.z < voxelSize.z);
+        assert(voxel.x >=0 && voxel.y >=0 && voxel.z >=0);
+        
+    }
+    
+    bool rayIntersectsTriangle(glm::vec3 p, glm::vec3 d, glm::vec3 v0, glm::vec3 v1, glm::vec3 v2, glm:: vec3 * hitLocation) const
+    {
         
         glm::vec3 e1 = v1 - v0;
         glm::vec3 e2 = v2 - v0;
@@ -203,6 +230,12 @@ struct voxelOperator {
         
         if (t > 0.00001)
         {
+            // calculate hit location
+            glm::vec3 hLoc =  p + d*t;
+            hitLocation->x = hLoc.x;
+            hitLocation->y = hLoc.y;
+            hitLocation->z = hLoc.z;
+            
             return true;
         }
         else
@@ -218,39 +251,61 @@ struct voxelOperator {
         struct aabb triaabb = calculateBoundingBox(vert1,vert2,vert3);
         // conver to screen space
         glm::vec3 distance;
-        struct aabb screenCords = convertToScreenSpace(triaabb,aabbLow,aabbRun);
+        struct aabb screenCords = convertToScreenSpace(triaabb,aabbLow,aabbRun,voxelSize);
         
         //find the largest axis
         glm::vec3 normal = glm::normalize(glm::cross(vert3 - vert1, vert2 - vert1));
         int projectionAxis = largestAxis(normal.x,normal.y,normal.z);
         
         int uStart = 0, uEnd = 0, vStart = 0,vEnd = 0;
-        if (projectionAxis == 1) {uStart = screenCords.lower.z; uEnd = screenCords.lower.z; vStart = screenCords.lower.z; vEnd = screenCords.lower.z;};
-        if (projectionAxis == 2) {uStart = screenCords.lower.z; uEnd = screenCords.lower.z; vStart = screenCords.lower.z; vEnd = screenCords.lower.z;};
-        if (projectionAxis == 3) {uStart = screenCords.lower.z; uEnd = screenCords.lower.z; vStart = screenCords.lower.z; vEnd = screenCords.lower.z;};
+        if (projectionAxis == 1) {uStart = screenCords.lower.y; uEnd = screenCords.upper.y; vStart = screenCords.lower.z; vEnd = screenCords.upper.z;}; //x
+        if (projectionAxis == 2) {uStart = screenCords.lower.x; uEnd = screenCords.upper.x; vStart = screenCords.lower.z; vEnd = screenCords.upper.z;}; //y
+        if (projectionAxis == 3) {uStart = screenCords.lower.x; uEnd = screenCords.upper.x; vStart = screenCords.lower.y; vEnd = screenCords.upper.y;}; //z
         
         
-        for( int u = uStart ;u<uEnd;u++)
+        for( int u = uStart ;u < uEnd; u++)
         {
-            for(int v = vStart;v < vEnd ; v++)
+            for(int v = vStart;v < vEnd ;v++)
             {
-                
-            }
-        }
-        
-        
-        for(int k = screenCords.lower.z; k<=screenCords.upper.z;k++)
-        {
-            for(int j = screenCords.lower.y; j<=screenCords.upper.y;j++)
-            {
-                for(int x = screenCords.lower.x; x<=screenCords.upper.x; x++)
+                glm::vec3 screenIndex;
+                glm::vec3 direction = glm::vec3(0,0,0);
+                if(projectionAxis == 1)
                 {
-                    // rasterize the triangle
-                    assert(screenCords.upper.x >=  screenCords.lower.x
-                           && screenCords.upper.y >=  screenCords.lower.y
-                           && screenCords.upper.z >=  screenCords.lower.z);
+                    screenIndex.y = u;
+                    screenIndex.z = v;
+                    screenIndex.x = 0;
+                    direction.x = 1.0;
+                }
+                else if(projectionAxis == 2)
+                {
+                    screenIndex.z = v;
+                    screenIndex.x = u;
+                    screenIndex.y = 0;
+                    direction.y = 1.0;
+                }
+                else if(projectionAxis == 2)
+                {
+                    screenIndex.x = u;
+                    screenIndex.y = v;
+                    screenIndex.z = 0;
+                    direction.z = 1.0;
                     
                 }
+                else
+                {
+                    std::cout<<"Error projection axis"<<std::endl;
+                }
+                
+                // shoot ray find intersection point
+                glm::vec3 rayHitPosition;
+                glm::vec3 po = convertIndexToCoords(screenIndex, aabbLow, aabbRun, voxelSize);
+                
+                if(rayIntersectsTriangle(po, direction, vert1, vert2, vert3, &rayHitPosition))
+                {
+                    glm::vec3 fillIndex = convertCoordToIndex(rayHitPosition,aabbLow,aabbRun,voxelSize);
+                    MarkOutputVoxel(fillIndex,voxelSize);
+                }
+                
             }
         }
     }
@@ -267,12 +322,7 @@ struct voxelOperator {
             glm::vec3 vert3 = verts[triangleVertId + 2];
             
             TriangleRasterizer(vert1,vert2,vert3,storage);
-            
 
-            
-            
-            
-            
         }
     }
 };
