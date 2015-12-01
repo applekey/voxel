@@ -159,12 +159,18 @@ struct voxelOperator {
         return screenIndex;
     }
     
-    glm::vec3 convertIndexToCoords(glm::vec3 index, glm::vec3 aabbLower, glm::vec3 aabbRun, glm::vec3 voxelSize) const
+    glm::vec3 convertIndexToCoords(glm::vec3 index, glm::vec3 aabbLower, glm::vec3 aabbRun, glm::vec3 voxelSize, bool mid) const
     {
         //floating points per voxel
         glm::vec3 voxelLenghts = glm::vec3(aabbRun.x/voxelSize.x,aabbRun.y/voxelSize.y,aabbRun.z/voxelSize.z);
-        
-        return aabbLower + index * voxelLenghts;
+        if(mid)
+        {
+            return aabbLower + index * voxelLenghts + voxelLenghts/2.0f;
+        }
+        else
+        {
+            return aabbLower + index * voxelLenghts;
+        }
     }
     
     glm::vec3 convertCoordToIndex(glm::vec3 coord, glm::vec3 aabbLower, glm::vec3 aabbRun, glm::vec3 voxelSize) const
@@ -266,7 +272,7 @@ struct voxelOperator {
         
         //find the largest axis
         glm::vec3 normal = glm::normalize(glm::cross(vert3 - vert1, vert2 - vert1));
-        int projectionAxis = largestAxis(normal.x,normal.y,normal.z);
+        int projectionAxis = largestAxis(fabs(normal.x),fabs(normal.y),fabs(normal.z));
         
         int uStart = 0, uEnd = 0, vStart = 0,vEnd = 0;
         if (projectionAxis == 1) {uStart = screenCords.lower.y; uEnd = screenCords.upper.y; vStart = screenCords.lower.z; vEnd = screenCords.upper.z;}; //x
@@ -303,7 +309,6 @@ struct voxelOperator {
                     screenIndex.y = v;
                     screenIndex.z = 0;
                     direction.z = 1.0;
-                    
                 }
                 else
                 {
@@ -312,7 +317,7 @@ struct voxelOperator {
                 
                 // shoot ray find intersection point
                 glm::vec3 rayHitPosition;
-                glm::vec3 po = convertIndexToCoords(screenIndex, aabbLow, aabbRun, voxelSize);
+                glm::vec3 po = convertIndexToCoords(screenIndex, aabbLow, aabbRun, voxelSize,true);
                 
                 if(rayIntersectsTriangle(po, direction, vert1, vert2, vert3, &rayHitPosition))
                 {
@@ -369,15 +374,23 @@ int main()
     vop.aabbHigh = aabbHigh;
     vop.aabbRun = glm::vec3( aabbHigh.x - aabbLow.x, aabbHigh.y - aabbLow.y, aabbHigh.z - aabbLow.z);
     
-    tbb::task_scheduler_init init(1); // run 1 thread for debugging
+    //tbb::task_scheduler_init init(1); // run 1 thread for debugging
     tbb::parallel_for( tbb::blocked_range<int>( 1, triangles.size()/3 ), vop );
     
     
-    int z = 40;
+    int z = 3;
     
     for (int j =0; j < SCREENSIZE; j++) {
         for (int i =0; i < SCREENSIZE; i++) {
-            std::cout<<(int)output[j*SCREENSIZE + SCREENSIZE * SCREENSIZE * z+ i];
+            
+            int intOutput = output[j*SCREENSIZE + SCREENSIZE * SCREENSIZE * z+ i];
+            if (intOutput == 0) {
+                std::cout<<" ";
+            }
+            else
+            {
+                std::cout<<intOutput;
+            }
         }
         std::cout<<std::endl;
     }
