@@ -14,8 +14,8 @@
 #include "tbb/parallel_for.h"
 #include "tbb/blocked_range.h"
 
-#define OBJFILE "/Users/applekey/Documents/datasets/monkey.obj"
-#define SCREENSIZE 64
+#define OBJFILE "/Users/applekey/Documents/obj/cone.obj"
+#define SCREENSIZE 128
 
 std::vector<glm::vec3> LoadObjFindAABB(const char * filename, glm::vec3 * aabbLow, glm::vec3 *  aabbHigh)
 {
@@ -34,7 +34,6 @@ std::vector<glm::vec3> LoadObjFindAABB(const char * filename, glm::vec3 * aabbLo
     std::string line;
     while (std::getline(in, line))
     {
-        //cout<<line<<endl;
         if (line.substr(0,2)=="v "){
             std::istringstream v(line.substr(2));
             glm::vec3 vert;
@@ -86,7 +85,6 @@ std::vector<glm::vec3> LoadObjFindAABB(const char * filename, glm::vec3 * aabbLo
             faceIndex.push_back(b);
             faceIndex.push_back(c);
         }
-        
     }
     for(unsigned int i=0;i<faceIndex.size();i++)
     {
@@ -179,13 +177,26 @@ struct voxelOperator {
         return indexCoords;
     }
     
-    void MarkOutputVoxel(glm::vec3 voxel, glm::vec3 voxelSize) const
+    void MarkOutputVoxel(glm::vec3 voxel, glm::vec3 voxelSize, unsigned char * output) const
     {
+        if (voxel.x >= voxelSize.x || voxel.y >= voxelSize.y || voxel.z >= voxelSize.z)
+        {
+            return;
+        }
+        
         assert(voxel.x < voxelSize.x
               && voxel.y < voxelSize.y
                && voxel.z < voxelSize.z);
         assert(voxel.x >=0 && voxel.y >=0 && voxel.z >=0);
         
+        int plane = voxelSize.y * voxelSize.y;
+        int stride = voxelSize.y;
+        int outputIndex = voxel.x + voxel.y * stride + voxel.z*plane;
+        
+        assert(outputIndex <= (voxelSize.x * voxelSize.y * voxelSize.z));
+        
+        //std::cout<<"x:"<<voxel.x<<"y:"<<voxel.y<<"z:"<<voxel.z<<std::endl;
+        output[outputIndex] = 1;
     }
     
     bool rayIntersectsTriangle(glm::vec3 p, glm::vec3 d, glm::vec3 v0, glm::vec3 v1, glm::vec3 v2, glm:: vec3 * hitLocation) const
@@ -262,10 +273,13 @@ struct voxelOperator {
         if (projectionAxis == 2) {uStart = screenCords.lower.x; uEnd = screenCords.upper.x; vStart = screenCords.lower.z; vEnd = screenCords.upper.z;}; //y
         if (projectionAxis == 3) {uStart = screenCords.lower.x; uEnd = screenCords.upper.x; vStart = screenCords.lower.y; vEnd = screenCords.upper.y;}; //z
         
+//        std::cout<<uStart<<" "<<uEnd<<std::endl;
+//        std::cout<<vStart<<" "<<vEnd<<std::endl;
+//        std::cout<<std::endl;
         
-        for( int u = uStart ;u < uEnd; u++)
+        for( int u = uStart ;u <= uEnd; u++)
         {
-            for(int v = vStart;v < vEnd ;v++)
+            for(int v = vStart;v <= vEnd ;v++)
             {
                 glm::vec3 screenIndex;
                 glm::vec3 direction = glm::vec3(0,0,0);
@@ -283,7 +297,7 @@ struct voxelOperator {
                     screenIndex.y = 0;
                     direction.y = 1.0;
                 }
-                else if(projectionAxis == 2)
+                else if(projectionAxis == 3)
                 {
                     screenIndex.x = u;
                     screenIndex.y = v;
@@ -303,7 +317,7 @@ struct voxelOperator {
                 if(rayIntersectsTriangle(po, direction, vert1, vert2, vert3, &rayHitPosition))
                 {
                     glm::vec3 fillIndex = convertCoordToIndex(rayHitPosition,aabbLow,aabbRun,voxelSize);
-                    MarkOutputVoxel(fillIndex,voxelSize);
+                    MarkOutputVoxel(fillIndex,voxelSize,output);
                 }
                 
             }
@@ -335,12 +349,16 @@ int main()
     
     //intilize output
     assert(isPowerOfTwo(SCREENSIZE));
-    unsigned char * output = new unsigned char [SCREENSIZE * SCREENSIZE * SCREENSIZE / 8];
-    
+    unsigned int bufferSize =SCREENSIZE * SCREENSIZE * SCREENSIZE;
+    unsigned char * output = new unsigned char [bufferSize];
+    for(int i = 0;i < bufferSize;i++)
+    {
+        output[i] = 0;
+    }
     //AABB
-    glm::vec3 aabbLow = glm::vec3(FLT_MIN,FLT_MIN,FLT_MIN);
-    glm::vec3 aabbHigh = glm::vec3(FLT_MAX,FLT_MAX,FLT_MAX);
-    
+    glm::vec3 aabbLow = glm::vec3(FLT_MAX,FLT_MAX,FLT_MAX);
+
+    glm::vec3 aabbHigh = glm::vec3(FLT_MIN,FLT_MIN,FLT_MIN);
     //read in obj
     std::vector<glm::vec3> triangles = LoadObjFindAABB(OBJFILE, &aabbLow,&aabbHigh);
     struct voxelOperator vop;
@@ -351,8 +369,18 @@ int main()
     vop.aabbHigh = aabbHigh;
     vop.aabbRun = glm::vec3( aabbHigh.x - aabbLow.x, aabbHigh.y - aabbLow.y, aabbHigh.z - aabbLow.z);
     
+    tbb::task_scheduler_init init(1); // run 1 thread for debugging
     tbb::parallel_for( tbb::blocked_range<int>( 1, triangles.size()/3 ), vop );
     
+    
+    int z = 40;
+    
+    for (int j =0; j < SCREENSIZE; j++) {
+        for (int i =0; i < SCREENSIZE; i++) {
+            std::cout<<(int)output[j*SCREENSIZE + SCREENSIZE * SCREENSIZE * z+ i];
+        }
+        std::cout<<std::endl;
+    }
     
     
     return 0;
