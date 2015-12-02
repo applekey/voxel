@@ -14,8 +14,8 @@
 #include "tbb/parallel_for.h"
 #include "tbb/blocked_range.h"
 
-#define OBJFILE "/Users/applekey/Documents/obj/cone.obj"
-#define SCREENSIZE 128
+#define OBJFILE "/Users/applekey/Documents/obj/sphere.obj"
+#define SCREENSIZE 64
 
 std::vector<glm::vec3> LoadObjFindAABB(const char * filename, glm::vec3 * aabbLow, glm::vec3 *  aabbHigh)
 {
@@ -112,15 +112,22 @@ struct voxelOperator {
     glm::vec3 aabbHigh;
     glm::vec3 aabbRun;
     
-    //return 1 = x, 2 = y, 3 = z
+    //return 0 = x, 1 = y, 2 = z
     int largestAxis(float x, float y, float z) const
     {
         float max = fmax(x,fmax(y,z));
-        if(max == x) return 1; // x
-        if(max == y) return 2; // y
-        if(max == z) return 3; // z
+        if(max == x) return 0; // x
+        if(max == y) return 1; // y
+        if(max == z) return 2; // z
         return -1;
     }
+    glm::vec3 swizzleVert(glm::vec3 vertex, int * mapping) const
+    {
+        float points[3] = {vertex.x,vertex.y,vertex.z};
+        glm::vec3 swizPoint = glm::vec3(points[mapping[0]],points[mapping[1]],points[mapping[2]]);
+        return swizPoint;
+    }
+    
     
     struct aabb
     {
@@ -133,34 +140,41 @@ struct voxelOperator {
         struct aabb cd;
         
         cd.lower.x = fmin(vert1.x,(fmin(vert2.x, vert3.x)));
-        cd.lower.y = fmin(vert1.y,(fmin(vert2.y, vert3.z)));
-        cd.lower.z = fmin(vert1.z,(fmin(vert2.y, vert3.z)));
+        cd.lower.y = fmin(vert1.y,(fmin(vert2.y, vert3.y)));
+        cd.lower.z = fmin(vert1.z,(fmin(vert2.z, vert3.z)));
         
         cd.upper.x = fmax(vert1.x,(fmax(vert2.x, vert3.x)));
-        cd.upper.y = fmax(vert1.y,(fmax(vert2.y, vert3.z)));
-        cd.upper.z = fmax(vert1.z,(fmax(vert2.y, vert3.z)));
+        cd.upper.y = fmax(vert1.y,(fmax(vert2.y, vert3.y)));
+        cd.upper.z = fmax(vert1.z,(fmax(vert2.z, vert3.z)));
         
         return cd;
     }
     
-    struct aabb convertToScreenSpace(struct aabb vec, glm::vec3 aabbLower, glm::vec3 aabbRun, glm::vec3 voxelSize) const
+    struct aabb convertToScreenSpace(struct aabb vec, glm::vec3 faabbLower, glm::vec3 faabbRun, glm::vec3 fvoxelSize) const
     {
+        assert(vec.lower.x >= faabbLower.x);
+        assert(vec.lower.y >= faabbLower.y);
+        
         // find the lower
         struct aabb screenIndex;
-        screenIndex.lower.x = int((vec.lower.x - aabbLower.x)/(aabbRun.x) * voxelSize.x);
-        screenIndex.lower.y = int((vec.lower.y - aabbLower.y)/(aabbRun.y) * voxelSize.y);
-        screenIndex.lower.z = int((vec.lower.z - aabbLower.z)/(aabbRun.z) * voxelSize.z);
+        screenIndex.lower.x = int((vec.lower.x - faabbLower.x)/(faabbRun.x) * voxelSize.x);
+        screenIndex.lower.y = int((vec.lower.y - faabbLower.y)/(faabbRun.y) * voxelSize.y);
+        screenIndex.lower.z = int((vec.lower.z - faabbLower.z)/(faabbRun.z) * voxelSize.z);
         
         //find upper
-        screenIndex.upper.x = int((vec.upper.x - aabbLower.x)/(aabbRun.x) * voxelSize.x);
-        screenIndex.upper.y = int((vec.upper.y - aabbLower.y)/(aabbRun.y) * voxelSize.y);
-        screenIndex.upper.z = int((vec.upper.z - aabbLower.z)/(aabbRun.z) * voxelSize.z);
+        screenIndex.upper.x = int((vec.upper.x - faabbLower.x)/(faabbRun.x) * voxelSize.x);
+        screenIndex.upper.y = int((vec.upper.y - faabbLower.y)/(faabbRun.y) * voxelSize.y);
+        screenIndex.upper.z = int((vec.upper.z - faabbLower.z)/(faabbRun.z) * voxelSize.z);
         
         return screenIndex;
     }
     
     glm::vec3 convertIndexToCoords(glm::vec3 index, glm::vec3 aabbLower, glm::vec3 aabbRun, glm::vec3 voxelSize, bool mid) const
     {
+        
+        assert(index.x >= 0);
+        assert(index.y >= 0);
+        
         //floating points per voxel
         glm::vec3 voxelLenghts = glm::vec3(aabbRun.x/voxelSize.x,aabbRun.y/voxelSize.y,aabbRun.z/voxelSize.z);
         if(mid)
@@ -201,7 +215,7 @@ struct voxelOperator {
         
         assert(outputIndex <= (voxelSize.x * voxelSize.y * voxelSize.z));
         
-        //std::cout<<"x:"<<voxel.x<<"y:"<<voxel.y<<"z:"<<voxel.z<<std::endl;
+        //std::cout<<"x:"<<voxel.x<<" y:"<<voxel.y<<" z:"<<voxel.z<<std::endl;
         output[outputIndex] = 1;
     }
     
@@ -263,21 +277,74 @@ struct voxelOperator {
     
     void TriangleRasterizer(glm::vec3 vert1,glm::vec3 vert2,glm::vec3 vert3, unsigned char * output) const
     {
-        //calculate smaller bounding box
-        
-        struct aabb triaabb = calculateBoundingBox(vert1,vert2,vert3);
-        // conver to screen space
-        glm::vec3 distance;
-        struct aabb screenCords = convertToScreenSpace(triaabb,aabbLow,aabbRun,voxelSize);
-        
         //find the largest axis
         glm::vec3 normal = glm::normalize(glm::cross(vert3 - vert1, vert2 - vert1));
         int projectionAxis = largestAxis(fabs(normal.x),fabs(normal.y),fabs(normal.z));
         
-        int uStart = 0, uEnd = 0, vStart = 0,vEnd = 0;
-        if (projectionAxis == 1) {uStart = screenCords.lower.y; uEnd = screenCords.upper.y; vStart = screenCords.lower.z; vEnd = screenCords.upper.z;}; //x
-        if (projectionAxis == 2) {uStart = screenCords.lower.x; uEnd = screenCords.upper.x; vStart = screenCords.lower.z; vEnd = screenCords.upper.z;}; //y
-        if (projectionAxis == 3) {uStart = screenCords.lower.x; uEnd = screenCords.upper.x; vStart = screenCords.lower.y; vEnd = screenCords.upper.y;}; //z
+        //swizzle xyz
+        int mapping[3];
+        switch(projectionAxis)
+        {
+            case 0: //x normal
+            {
+                mapping[0] = 2;
+                mapping[1] = 1;
+                mapping[2] = 0;
+                break;
+            }
+            case 1: //y normal
+            {
+                mapping[0] = 0;
+                mapping[1] = 2;
+                mapping[2] = 1;
+                break;
+            }
+            case 2: //z normal
+            {
+                mapping[0] = 0;
+                mapping[1] = 1;
+                mapping[2] = 2;
+                break;
+            }
+        }
+        
+        assert(vert1.x >= aabbLow.x);
+        assert(vert1.y >= aabbLow.y);
+        assert(vert1.z >= aabbLow.z);
+        
+        assert(vert2.x >= aabbLow.x);
+        assert(vert2.y >= aabbLow.y);
+        assert(vert2.z >= aabbLow.z);
+        
+        assert(vert3.x >= aabbLow.x);
+        assert(vert3.y >= aabbLow.y);
+        assert(vert3.z >= aabbLow.z);
+        
+        glm::vec3 swizzlePoints[3];
+        swizzlePoints[0] = swizzleVert(vert1,mapping);
+        swizzlePoints[1] = swizzleVert(vert2,mapping);
+        swizzlePoints[2] = swizzleVert(vert3,mapping);
+    
+        //calculate triangle bounding square
+        struct aabb triaabb = calculateBoundingBox(swizzlePoints[0],swizzlePoints[1],swizzlePoints[2]);
+        // conver to screen space
+        
+        glm::vec3 saabbLow =swizzleVert(aabbLow,mapping);
+        glm::vec3 saabbRun =swizzleVert(aabbRun,mapping);
+        glm::vec3 svoxelSize =swizzleVert(voxelSize,mapping);
+        
+
+        struct aabb screenCords = convertToScreenSpace(triaabb,saabbLow,saabbRun,svoxelSize);
+        
+        //swizzle
+        int vStart = screenCords.lower.x;
+        int vEnd = screenCords.upper.x;
+        int uStart = screenCords.lower.y;
+        int uEnd = screenCords.upper.y;
+        glm::vec3 direction = glm::vec3(0,0,1.0);
+        
+        assert(uStart >=0 && uEnd <=svoxelSize.x);
+        assert(vStart >=0 && vEnd <=svoxelSize.y);
         
 //        std::cout<<uStart<<" "<<uEnd<<std::endl;
 //        std::cout<<vStart<<" "<<vEnd<<std::endl;
@@ -288,43 +355,34 @@ struct voxelOperator {
             for(int v = vStart;v <= vEnd ;v++)
             {
                 glm::vec3 screenIndex;
-                glm::vec3 direction = glm::vec3(0,0,0);
-                if(projectionAxis == 1)
-                {
-                    screenIndex.y = u;
-                    screenIndex.z = v;
-                    screenIndex.x = 0;
-                    direction.x = 1.0;
-                }
-                else if(projectionAxis == 2)
-                {
-                    screenIndex.z = v;
-                    screenIndex.x = u;
-                    screenIndex.y = 0;
-                    direction.y = 1.0;
-                }
-                else if(projectionAxis == 3)
-                {
-                    screenIndex.x = u;
-                    screenIndex.y = v;
-                    screenIndex.z = 0;
-                    direction.z = 1.0;
-                }
-                else
-                {
-                    std::cout<<"Error projection axis"<<std::endl;
-                }
-                
+                screenIndex.x = u;
+                screenIndex.y = v;
+                screenIndex.z = screenCords.lower.z;
                 // shoot ray find intersection point
                 glm::vec3 rayHitPosition;
-                glm::vec3 po = convertIndexToCoords(screenIndex, aabbLow, aabbRun, voxelSize,true);
+                glm::vec3 po = convertIndexToCoords(screenIndex, saabbLow, saabbRun, svoxelSize,true);
+                po.z =-99;
+                //dilate vertpositions
                 
-                if(rayIntersectsTriangle(po, direction, vert1, vert2, vert3, &rayHitPosition))
+                glm::vec3 e0 = glm::vec3( glm::vec2(vert2) - glm::vec2(vert1), 0 );
+                glm::vec3 e1 = glm::vec3( glm::vec2(vert3) - glm::vec2(vert2), 0 );
+                glm::vec3 e2 = glm::vec3( glm::vec2(vert1) - glm::vec2(vert3), 0 );
+                
+                glm::vec3 n0 = glm::cross( e0, direction );
+                glm::vec3 n1 = glm::cross( e1, direction );
+                glm::vec3 n2 = glm::cross( e2, direction );
+                
+                if(rayIntersectsTriangle(po, direction, swizzlePoints[0], swizzlePoints[1], swizzlePoints[2], &rayHitPosition))
                 {
+                    //unSwizzle
+                    float rayHitPos[3] ={rayHitPosition.x,rayHitPosition.y,rayHitPosition.z};
+                    rayHitPosition[mapping[0]] = rayHitPos[0];
+                    rayHitPosition[mapping[1]] = rayHitPos[1];
+                    rayHitPosition[mapping[2]] = rayHitPos[2];
+                    
                     glm::vec3 fillIndex = convertCoordToIndex(rayHitPosition,aabbLow,aabbRun,voxelSize);
                     MarkOutputVoxel(fillIndex,voxelSize,output);
                 }
-                
             }
         }
     }
@@ -345,7 +403,7 @@ struct voxelOperator {
         }
     }
 };
-/*------------------------------main functions end --------------------*/
+/*------------------------------main functions end -------------------------------*/
 
 int main()
 {
@@ -374,11 +432,11 @@ int main()
     vop.aabbHigh = aabbHigh;
     vop.aabbRun = glm::vec3( aabbHigh.x - aabbLow.x, aabbHigh.y - aabbLow.y, aabbHigh.z - aabbLow.z);
     
-    //tbb::task_scheduler_init init(1); // run 1 thread for debugging
-    tbb::parallel_for( tbb::blocked_range<int>( 1, triangles.size()/3 ), vop );
+    tbb::task_scheduler_init init(1); // run 1 thread for debugging
+    tbb::parallel_for( tbb::blocked_range<int>( 0, triangles.size()/3 ), vop );
     
     
-    int z = 3;
+    int z = 22;
     
     for (int j =0; j < SCREENSIZE; j++) {
         for (int i =0; i < SCREENSIZE; i++) {
@@ -392,7 +450,7 @@ int main()
                 std::cout<<intOutput;
             }
         }
-        std::cout<<std::endl;
+        std::cout<<"--"<<std::endl;
     }
     
     
