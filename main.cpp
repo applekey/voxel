@@ -424,57 +424,57 @@ int main()
     
     svo sv;
     
-    sv.BuildSVO(NULL, sscreenSize);
+    sv.BuildSVOUnitTest();
     
     
     return 0;
     //screen size
-    glm::vec3 screenSize(SCREENSIZE,SCREENSIZE,SCREENSIZE);
-    
-    //intilize output
-    assert(isPowerOfTwo(SCREENSIZE));
-    unsigned int bufferSize =SCREENSIZE * SCREENSIZE * SCREENSIZE;
-    unsigned char * output = new unsigned char [bufferSize];
-    for(int i = 0;i < bufferSize;i++)
-    {
-        output[i] = 0;
-    }
-    //AABB
-    glm::vec3 aabbLow = glm::vec3(FLT_MAX,FLT_MAX,FLT_MAX);
-    
-    glm::vec3 aabbHigh = glm::vec3(FLT_MIN,FLT_MIN,FLT_MIN);
-    //read in obj
-    std::vector<glm::vec3> triangles = LoadObjFindAABB(OBJFILE, &aabbLow,&aabbHigh);
-    struct voxelOperator vop;
-    vop.triangles = &triangles;
-    vop.voxelSize = screenSize;
-    vop.storage = output;
-    vop.aabbLow = aabbLow;
-    vop.aabbHigh = aabbHigh;
-    vop.aabbRun = glm::vec3( aabbHigh.x - aabbLow.x, aabbHigh.y - aabbLow.y, aabbHigh.z - aabbLow.z);
-    
-    //tbb::task_scheduler_init init(1); // run 1 thread for debugging
-    tbb::parallel_for( tbb::blocked_range<int>( 1, triangles.size()/3 ), vop );
-    
-    
-    int z = 55;
-    
-    for (int j =0; j < SCREENSIZE; j++) {
-        for (int i =0; i < SCREENSIZE; i++) {
-            
-            int intOutput = output[j*SCREENSIZE + SCREENSIZE * SCREENSIZE * z+ i];
-            if (intOutput == 0) {
-                std::cout<<" ";
-            }
-            else
-            {
-                std::cout<<intOutput;
-            }
-        }
-        std::cout<<std::endl;
-    }
-    
-    
-    return 0;
+//    glm::vec3 screenSize(SCREENSIZE,SCREENSIZE,SCREENSIZE);
+//    
+//    //intilize output
+//    assert(isPowerOfTwo(SCREENSIZE));
+//    unsigned int bufferSize =SCREENSIZE * SCREENSIZE * SCREENSIZE;
+//    unsigned char * output = new unsigned char [bufferSize];
+//    for(int i = 0;i < bufferSize;i++)
+//    {
+//        output[i] = 0;
+//    }
+//    //AABB
+//    glm::vec3 aabbLow = glm::vec3(FLT_MAX,FLT_MAX,FLT_MAX);
+//    
+//    glm::vec3 aabbHigh = glm::vec3(FLT_MIN,FLT_MIN,FLT_MIN);
+//    //read in obj
+//    std::vector<glm::vec3> triangles = LoadObjFindAABB(OBJFILE, &aabbLow,&aabbHigh);
+//    struct voxelOperator vop;
+//    vop.triangles = &triangles;
+//    vop.voxelSize = screenSize;
+//    vop.storage = output;
+//    vop.aabbLow = aabbLow;
+//    vop.aabbHigh = aabbHigh;
+//    vop.aabbRun = glm::vec3( aabbHigh.x - aabbLow.x, aabbHigh.y - aabbLow.y, aabbHigh.z - aabbLow.z);
+//    
+//    //tbb::task_scheduler_init init(1); // run 1 thread for debugging
+//    tbb::parallel_for( tbb::blocked_range<int>( 1, triangles.size()/3 ), vop );
+//    
+//    
+//    int z = 55;
+//    
+//    for (int j =0; j < SCREENSIZE; j++) {
+//        for (int i =0; i < SCREENSIZE; i++) {
+//            
+//            int intOutput = output[j*SCREENSIZE + SCREENSIZE * SCREENSIZE * z+ i];
+//            if (intOutput == 0) {
+//                std::cout<<" ";
+//            }
+//            else
+//            {
+//                std::cout<<intOutput;
+//            }
+//        }
+//        std::cout<<std::endl;
+//    }
+//    
+//    
+//    return 0;
     
 }

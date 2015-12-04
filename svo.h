@@ -1,5 +1,5 @@
 
-
+#include <iomanip>
 class svo{
 
     unsigned char * svoHead;
@@ -45,7 +45,7 @@ public:
         return answer;
     }
     
-    inline void mortonDecode(uint64_t morton, int& x, int& y, int& z){
+    void mortonDecode(uint64_t morton, int& x, int& y, int& z){
         x = 0;
         y = 0;
         z = 0;
@@ -62,6 +62,34 @@ public:
         int stride = size[0];
         
         return voxel[z * plane + y * stride + x];
+    }
+    
+    int AddressCalc(int i,int j,int k) // for testing only
+    {
+        return i + j* 8 + k * 64;
+    }
+    
+    void BuildSVOUnitTest()
+    {
+        //create a dataset
+        //
+        unsigned char * voxSet = new unsigned char[8 * 8 * 8];
+        int stride = 8;
+        int plane = 64;
+        
+        for (int i = 0;i < 8*8*8;i++ )
+        {
+            voxSet[i] = 0;
+        }
+        
+        voxSet[AddressCalc(0, 0, 0)] = 1;
+        
+        int testSize[3] = {8,8,8};
+        
+        BuildSVO(voxSet,testSize);
+        
+        
+        
         
     }
     
@@ -71,6 +99,7 @@ public:
         int levels = voxelLevels(size[0]);
         //create level queue
         unsigned char * lvlQueue = new unsigned char [levels * 8];
+        
         int * lvlIndex = new int[levels];
         for(int i = 0; i < levels; i++)
         {
@@ -83,28 +112,47 @@ public:
         {
             int x,y,z;
             mortonDecode(mortonCode,x,y,z);
+            
+            //std::cout<<"x:"<<x<<" y:"<<y<<" z:"<<z<<std::endl;
             unsigned char vox = voxelAccess(voxel, x,y,z,size);
             
             //add new node to lowest level
-            int lowestLevelIndex =lvlIndex[(levels-1)];
-            lvlQueue[(levels-1)*8 + lowestLevelIndex] = vox;
-            int * currentLevelIndex = &lvlIndex[(levels-1)];
+            int * currentLevelIndex = &lvlIndex[levels-1];
+            lvlQueue[(levels-1)*8 + *currentLevelIndex] = vox;
             *currentLevelIndex +=1;
+            
             // check if level is full
             int currentLevel = levels - 1;
             while (currentLevel > 0 && *currentLevelIndex == 8)
             {
+                bool empty = true;
                 //check to see if currentlevel is empty
+                unsigned char writeVal = 0;
+                unsigned char increment = 1;
                 for(int i =0;i<8;i++)
                 {
+                    unsigned char voxVal = lvlQueue[currentLevel*8 + i];
+                    
+                    if (voxVal != 0) {
+                        empty = false;
+                        writeVal += increment;
+                        increment = increment<<1;
+                    }
                     
                 }
-                
-                //write current level's to file
-                
+            
+                if(!empty)
+                {
+                    //write current level's to file
+                    std::cout<<"Level:"<<currentLevel<<" nodevals:"<<static_cast<unsigned>(writeVal)<<std::endl;
+                }
+                *currentLevelIndex = 0;
                 //go up a level
                 currentLevel -= 1;
                 // insert entry into lvlQueue
+                currentLevelIndex = &lvlIndex[currentLevel];
+                lvlQueue[currentLevel*8 + *currentLevelIndex] = empty? 0:1;
+                *currentLevelIndex +=1;
                 
             }
             
