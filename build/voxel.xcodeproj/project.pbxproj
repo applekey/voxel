@@ -9,9 +9,9 @@
 /* Begin PBXAggregateTarget section */
 		67C1EFCC1B604F9E8FE704EB /* ZERO_CHECK */ = {
 			isa = PBXAggregateTarget;
-			buildConfigurationList = F97B08B946824515888E0CDB /* Build configuration list for PBXAggregateTarget "ZERO_CHECK" */;
+			buildConfigurationList = 4C9D32EE71D746C996A3CAF2 /* Build configuration list for PBXAggregateTarget "ZERO_CHECK" */;
 			buildPhases = (
-				8A071022337A451B8566AFDC /* CMake Rules */,
+				094D3DC6A4D442358F087887 /* CMake Rules */,
 			);
 			dependencies = (
 			);
@@ -20,13 +20,13 @@
 		};
 		BE9E2E791FB24F6BBB1CFCDE /* ALL_BUILD */ = {
 			isa = PBXAggregateTarget;
-			buildConfigurationList = 8C7BA6878BE840D6B2087C42 /* Build configuration list for PBXAggregateTarget "ALL_BUILD" */;
+			buildConfigurationList = 95590D7C691445F584F88596 /* Build configuration list for PBXAggregateTarget "ALL_BUILD" */;
 			buildPhases = (
-				A52A0DC6C90F4E52BFEEAF8A /* CMake Rules */,
+				CDF1B51F34F14C5BB2E967D8 /* CMake Rules */,
 			);
 			dependencies = (
-				22CB4BCDEBFD437791B29076 /* PBXTargetDependency */,
-				0B4E4E61E595437C95E2F67A /* PBXTargetDependency */,
+				5BF238635762472DA54AE229 /* PBXTargetDependency */,
+				A1585A77A561485C9FEC0B1B /* PBXTargetDependency */,
 			);
 			name = ALL_BUILD;
 			productName = ALL_BUILD;
@@ -34,36 +34,37 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
-		37EAFB513ED74787A7A1FDC4 /* /Users/applekey/Documents/voxel/CMakeLists.txt */ = {isa = PBXBuildFile; fileRef = 0B4115B58DF24884A1B09C50 /* /Users/applekey/Documents/voxel/CMakeLists.txt */; settings = {COMPILER_FLAGS = ""; }; };
-		7DEAA141BEA54640A91006F8 /* /Users/applekey/Documents/voxel/main.cpp */ = {isa = PBXBuildFile; fileRef = D3F9A1BF943F44CEA6FC011B /* /Users/applekey/Documents/voxel/main.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		156745FC48154115977D0FFF /* /Users/applekey/Documents/voxel/CMakeLists.txt */ = {isa = PBXBuildFile; fileRef = 0510271B6D8F4CE684129BBB /* /Users/applekey/Documents/voxel/CMakeLists.txt */; settings = {COMPILER_FLAGS = ""; }; };
+		5D3AECF399234BDFBC14C8A7 /* /Users/applekey/Documents/voxel/main.cpp */ = {isa = PBXBuildFile; fileRef = 52E8B79274EE40DE8059366B /* /Users/applekey/Documents/voxel/main.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		C5C36558A10A4EE7A4C15441 /* /Users/applekey/Documents/voxel/svo.h */ = {isa = PBXBuildFile; fileRef = A3DAD9D7F1B349E5A2EE20EC /* /Users/applekey/Documents/voxel/svo.h */; settings = {COMPILER_FLAGS = ""; }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXBuildStyle section */
-		0459370F540C47409FD1C422 /* MinSizeRel */ = {
+		0CEC0DA0294345A7BF5CEDF3 /* MinSizeRel */ = {
 			isa = PBXBuildStyle;
 			buildSettings = {
 				COPY_PHASE_STRIP = NO;
 			};
 			name = MinSizeRel;
 		};
-		A4FB82F0B48048C3AA55DC74 /* Release */ = {
+		100C0F9083F643BE9B7C9CD1 = {
+			isa = PBXBuildStyle;
+		};
+		6ABE6B987EFD47A4B21C2943 /* Release */ = {
 			isa = PBXBuildStyle;
 			buildSettings = {
 				COPY_PHASE_STRIP = NO;
 			};
 			name = Release;
 		};
-		CAA7844680D04EE68717C72A = {
-			isa = PBXBuildStyle;
-		};
-		EB91B6D308A4497E847A6A6F /* RelWithDebInfo */ = {
+		6F2D02A4A02A40F791BE9B47 /* RelWithDebInfo */ = {
 			isa = PBXBuildStyle;
 			buildSettings = {
 				COPY_PHASE_STRIP = NO;
 			};
 			name = RelWithDebInfo;
 		};
-		FD578A663BB34454BDC287FD /* Debug */ = {
+		C8C36412CC55418A96F38CAF /* Debug */ = {
 			isa = PBXBuildStyle;
 			buildSettings = {
 				COPY_PHASE_STRIP = NO;
@@ -73,119 +74,129 @@
 /* End PBXBuildStyle section */
 
 /* Begin PBXContainerItemProxy section */
-		0BA895C6CBB44CFA94F7E187 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 547853C15D044B9794C27F9D /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 67C1EFCC1B604F9E8FE704EB;
-			remoteInfo = ZERO_CHECK;
-		};
-		66DCAE98FB9543C292BF20BB /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 547853C15D044B9794C27F9D /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 67C1EFCC1B604F9E8FE704EB;
-			remoteInfo = ZERO_CHECK;
-		};
-		7A0B39E0466249E2BE3C2C59 /* PBXContainerItemProxy */ = {
+		246418093EBD4BF788498378 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 547853C15D044B9794C27F9D /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = D350BEBCCB6248339FCE6011;
 			remoteInfo = voxel;
 		};
+		589F3771A8724DE3960A8BA2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 547853C15D044B9794C27F9D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 67C1EFCC1B604F9E8FE704EB;
+			remoteInfo = ZERO_CHECK;
+		};
+		F80D828D7AC34D91AF0FD470 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 547853C15D044B9794C27F9D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 67C1EFCC1B604F9E8FE704EB;
+			remoteInfo = ZERO_CHECK;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		0B4115B58DF24884A1B09C50 /* /Users/applekey/Documents/voxel/CMakeLists.txt */ = {isa = PBXFileReference; explicitFileType = sourcecode.text; fileEncoding = 4; name = CMakeLists.txt; path = CMakeLists.txt; sourceTree = SOURCE_ROOT; };
-		13F316AD630B4FB79BA842E4 /* /Users/applekey/Documents/voxel/CMakeLists.txt */ = {isa = PBXFileReference; explicitFileType = sourcecode.text; fileEncoding = 4; name = CMakeLists.txt; path = CMakeLists.txt; sourceTree = SOURCE_ROOT; };
-		8CE61A560BD3440EA448B6F1 /* voxel */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; path = voxel; refType = 0; sourceTree = BUILT_PRODUCTS_DIR; };
-		D3F9A1BF943F44CEA6FC011B /* /Users/applekey/Documents/voxel/main.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = main.cpp; path = main.cpp; sourceTree = SOURCE_ROOT; };
-		DF5501E40B554CFE88F1C891 /* /Users/applekey/Documents/voxel/CMakeLists.txt */ = {isa = PBXFileReference; explicitFileType = sourcecode.text; fileEncoding = 4; name = CMakeLists.txt; path = CMakeLists.txt; sourceTree = SOURCE_ROOT; };
+		0510271B6D8F4CE684129BBB /* /Users/applekey/Documents/voxel/CMakeLists.txt */ = {isa = PBXFileReference; explicitFileType = sourcecode.text; fileEncoding = 4; name = CMakeLists.txt; path = CMakeLists.txt; sourceTree = SOURCE_ROOT; };
+		34F9E41A4E204FC593730F8A /* /Users/applekey/Documents/voxel/CMakeLists.txt */ = {isa = PBXFileReference; explicitFileType = sourcecode.text; fileEncoding = 4; name = CMakeLists.txt; path = CMakeLists.txt; sourceTree = SOURCE_ROOT; };
+		52E8B79274EE40DE8059366B /* /Users/applekey/Documents/voxel/main.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = main.cpp; path = main.cpp; sourceTree = SOURCE_ROOT; };
+		9BB5A3C746174453AD41E2D7 /* voxel */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; path = voxel; refType = 0; sourceTree = BUILT_PRODUCTS_DIR; };
+		A3DAD9D7F1B349E5A2EE20EC /* /Users/applekey/Documents/voxel/svo.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = svo.h; path = svo.h; sourceTree = SOURCE_ROOT; };
+		BCBEC5574ACC487BB632827B /* /Users/applekey/Documents/voxel/CMakeLists.txt */ = {isa = PBXFileReference; explicitFileType = sourcecode.text; fileEncoding = 4; name = CMakeLists.txt; path = CMakeLists.txt; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
-		0BA60EE0D4774A64BF3963F2 /* Sources */ = {
+		1A78B345F8774A0A87513E44 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				DA0AD4B8784549ACBEFF01BD /* ALL_BUILD */,
-				3DA2BEFC1EC44A84814FE0CD /* voxel */,
-				B19EB207784A457AADD95BDD /* ZERO_CHECK */,
-			);
-			name = Sources;
-			sourceTree = "<group>";
-		};
-		1E7094310D15459984D92585 /* Source Files */ = {
-			isa = PBXGroup;
-			children = (
-				D3F9A1BF943F44CEA6FC011B /* /Users/applekey/Documents/voxel/main.cpp */,
-			);
-			name = "Source Files";
-			sourceTree = "<group>";
-		};
-		21240770A4C6450A874324A0 /* CMake Rules */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = "CMake Rules";
-			sourceTree = "<group>";
-		};
-		3DA2BEFC1EC44A84814FE0CD /* voxel */ = {
-			isa = PBXGroup;
-			children = (
-				1E7094310D15459984D92585 /* Source Files */,
-				0B4115B58DF24884A1B09C50 /* /Users/applekey/Documents/voxel/CMakeLists.txt */,
-			);
-			name = voxel;
-			sourceTree = "<group>";
-		};
-		4F924AF43F53405A870FB1AC /* CMake Rules */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = "CMake Rules";
-			sourceTree = "<group>";
-		};
-		8A2B0F7E86F54688A4171F07 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				8CE61A560BD3440EA448B6F1 /* voxel */,
+				9BB5A3C746174453AD41E2D7 /* voxel */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		A9AFAEA1556E456981056789 /* Resources */ = {
+		2BAA1C699F1343B2B5FE9B92 /* CMake Rules */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "CMake Rules";
+			sourceTree = "<group>";
+		};
+		6467C930A58C4579B2E80754 = {
+			isa = PBXGroup;
+			children = (
+				B9DA6022873846BB8439A320 /* Sources */,
+				9982C052F01F48F29C032E50 /* Resources */,
+				1A78B345F8774A0A87513E44 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		64C53F00389C48CA843097F8 /* ALL_BUILD */ = {
+			isa = PBXGroup;
+			children = (
+				F99D23FF64DE4155975972EB /* CMake Rules */,
+				BCBEC5574ACC487BB632827B /* /Users/applekey/Documents/voxel/CMakeLists.txt */,
+			);
+			name = ALL_BUILD;
+			sourceTree = "<group>";
+		};
+		86C11E55769A442DBE664955 /* ZERO_CHECK */ = {
+			isa = PBXGroup;
+			children = (
+				2BAA1C699F1343B2B5FE9B92 /* CMake Rules */,
+				34F9E41A4E204FC593730F8A /* /Users/applekey/Documents/voxel/CMakeLists.txt */,
+			);
+			name = ZERO_CHECK;
+			sourceTree = "<group>";
+		};
+		92D3CD502097499D9AD8DED1 /* Source Files */ = {
+			isa = PBXGroup;
+			children = (
+				52E8B79274EE40DE8059366B /* /Users/applekey/Documents/voxel/main.cpp */,
+			);
+			name = "Source Files";
+			sourceTree = "<group>";
+		};
+		9982C052F01F48F29C032E50 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
 			);
 			name = Resources;
 			sourceTree = "<group>";
 		};
-		B19EB207784A457AADD95BDD /* ZERO_CHECK */ = {
+		9F75B9CDC94D4C8BAD601A1D /* voxel */ = {
 			isa = PBXGroup;
 			children = (
-				4F924AF43F53405A870FB1AC /* CMake Rules */,
-				13F316AD630B4FB79BA842E4 /* /Users/applekey/Documents/voxel/CMakeLists.txt */,
+				92D3CD502097499D9AD8DED1 /* Source Files */,
+				C17F69D9521F4FFCA173D79C /* Header Files */,
+				0510271B6D8F4CE684129BBB /* /Users/applekey/Documents/voxel/CMakeLists.txt */,
 			);
-			name = ZERO_CHECK;
+			name = voxel;
 			sourceTree = "<group>";
 		};
-		DA0AD4B8784549ACBEFF01BD /* ALL_BUILD */ = {
+		B9DA6022873846BB8439A320 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				21240770A4C6450A874324A0 /* CMake Rules */,
-				DF5501E40B554CFE88F1C891 /* /Users/applekey/Documents/voxel/CMakeLists.txt */,
+				64C53F00389C48CA843097F8 /* ALL_BUILD */,
+				9F75B9CDC94D4C8BAD601A1D /* voxel */,
+				86C11E55769A442DBE664955 /* ZERO_CHECK */,
 			);
-			name = ALL_BUILD;
+			name = Sources;
 			sourceTree = "<group>";
 		};
-		DD4BFBABC1814288932616BA = {
+		C17F69D9521F4FFCA173D79C /* Header Files */ = {
 			isa = PBXGroup;
 			children = (
-				0BA60EE0D4774A64BF3963F2 /* Sources */,
-				A9AFAEA1556E456981056789 /* Resources */,
-				8A2B0F7E86F54688A4171F07 /* Products */,
+				A3DAD9D7F1B349E5A2EE20EC /* /Users/applekey/Documents/voxel/svo.h */,
 			);
+			name = "Header Files";
+			sourceTree = "<group>";
+		};
+		F99D23FF64DE4155975972EB /* CMake Rules */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "CMake Rules";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -193,18 +204,18 @@
 /* Begin PBXNativeTarget section */
 		D350BEBCCB6248339FCE6011 /* voxel */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 03FC215DA2CC4076B4223EBB /* Build configuration list for PBXNativeTarget "voxel" */;
+			buildConfigurationList = CEBF02FAC6B04A05821B678B /* Build configuration list for PBXNativeTarget "voxel" */;
 			buildPhases = (
-				EEB9C92CBDE64BFE8B6B971B /* Sources */,
+				DA9725CCFF984F779823C709 /* Sources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				91E6F93217584CEB8CA80758 /* PBXTargetDependency */,
+				11F173F75CBB49A1B3BDCBC5 /* PBXTargetDependency */,
 			);
 			name = voxel;
 			productName = voxel;
-			productReference = 8CE61A560BD3440EA448B6F1 /* voxel */;
+			productReference = 9BB5A3C746174453AD41E2D7 /* voxel */;
 			productType = "com.apple.product-type.tool";
 		};
 /* End PBXNativeTarget section */
@@ -215,18 +226,18 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
 			};
-			buildConfigurationList = D9269FCC43314A59A8F40A4C /* Build configuration list for PBXProject "voxel" */;
+			buildConfigurationList = 86914AC164CE4D10B48226DE /* Build configuration list for PBXProject "voxel" */;
 			buildSettings = {
 			};
 			buildStyles = (
-				FD578A663BB34454BDC287FD /* Debug */,
-				A4FB82F0B48048C3AA55DC74 /* Release */,
-				0459370F540C47409FD1C422 /* MinSizeRel */,
-				EB91B6D308A4497E847A6A6F /* RelWithDebInfo */,
+				C8C36412CC55418A96F38CAF /* Debug */,
+				6ABE6B987EFD47A4B21C2943 /* Release */,
+				0CEC0DA0294345A7BF5CEDF3 /* MinSizeRel */,
+				6F2D02A4A02A40F791BE9B47 /* RelWithDebInfo */,
 			);
 			compatibilityVersion = "Xcode 3.2";
 			hasScannedForEncodings = 0;
-			mainGroup = DD4BFBABC1814288932616BA;
+			mainGroup = 6467C930A58C4579B2E80754;
 			projectDirPath = ../;
 			projectRoot = "";
 			targets = (
@@ -238,22 +249,7 @@
 /* End PBXProject section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		398E9C38B9D8421B8CD918AA = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "# shell script goes here
-exit 0";
-			showEnvVarsInLog = 0;
-		};
-		8A071022337A451B8566AFDC /* CMake Rules */ = {
+		094D3DC6A4D442358F087887 /* CMake Rules */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -264,18 +260,7 @@ exit 0";
 			shellScript = "make -C /Users/applekey/Documents/voxel/build -f /Users/applekey/Documents/voxel/build/CMakeScripts/ZERO_CHECK_cmakeRulesBuildPhase.make$CONFIGURATION all";
 			showEnvVarsInLog = 0;
 		};
-		A52A0DC6C90F4E52BFEEAF8A /* CMake Rules */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			name = "CMake Rules";
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "make -C /Users/applekey/Documents/voxel/build -f /Users/applekey/Documents/voxel/build/CMakeScripts/ALL_BUILD_cmakeRulesBuildPhase.make$CONFIGURATION all";
-			showEnvVarsInLog = 0;
-		};
-		BFF1EFFF3A9E4AF1982EAC68 = {
+		7D10B8B1DE6E4A4894E77EE7 = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -290,293 +275,65 @@ exit 0";
 exit 0";
 			showEnvVarsInLog = 0;
 		};
+		B9E889F2FC7A4B038454006A = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# shell script goes here
+exit 0";
+			showEnvVarsInLog = 0;
+		};
+		CDF1B51F34F14C5BB2E967D8 /* CMake Rules */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			name = "CMake Rules";
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "make -C /Users/applekey/Documents/voxel/build -f /Users/applekey/Documents/voxel/build/CMakeScripts/ALL_BUILD_cmakeRulesBuildPhase.make$CONFIGURATION all";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		EEB9C92CBDE64BFE8B6B971B /* Sources */ = {
+		DA9725CCFF984F779823C709 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7DEAA141BEA54640A91006F8 /* /Users/applekey/Documents/voxel/main.cpp */,
+				5D3AECF399234BDFBC14C8A7 /* /Users/applekey/Documents/voxel/main.cpp */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		0B4E4E61E595437C95E2F67A /* PBXTargetDependency */ = {
+		11F173F75CBB49A1B3BDCBC5 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 67C1EFCC1B604F9E8FE704EB /* ZERO_CHECK */;
+			targetProxy = F80D828D7AC34D91AF0FD470 /* PBXContainerItemProxy */;
+		};
+		5BF238635762472DA54AE229 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 67C1EFCC1B604F9E8FE704EB /* ZERO_CHECK */;
+			targetProxy = 589F3771A8724DE3960A8BA2 /* PBXContainerItemProxy */;
+		};
+		A1585A77A561485C9FEC0B1B /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = D350BEBCCB6248339FCE6011 /* voxel */;
-			targetProxy = 7A0B39E0466249E2BE3C2C59 /* PBXContainerItemProxy */;
-		};
-		22CB4BCDEBFD437791B29076 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 67C1EFCC1B604F9E8FE704EB /* ZERO_CHECK */;
-			targetProxy = 0BA895C6CBB44CFA94F7E187 /* PBXContainerItemProxy */;
-		};
-		91E6F93217584CEB8CA80758 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 67C1EFCC1B604F9E8FE704EB /* ZERO_CHECK */;
-			targetProxy = 66DCAE98FB9543C292BF20BB /* PBXContainerItemProxy */;
+			targetProxy = 246418093EBD4BF788498378 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		0D14C91043B14B4C952E742A /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
-				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
-				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'", );
-				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				HEADER_SEARCH_PATHS = (/usr/local/include, );
-				INSTALL_PATH = "";
-				OTHER_LDFLAGS = " ";
-				OTHER_REZFLAGS = "";
-				PRODUCT_NAME = ALL_BUILD;
-				SECTORDER_FLAGS = "";
-				SYMROOT = /Users/applekey/Documents/voxel/build;
-				USE_HEADERMAP = NO;
-				WARNING_CFLAGS = ("-Wmost", "-Wno-four-char-constants", "-Wno-unknown-pragmas", "$(inherited)", );
-			};
-			name = Release;
-		};
-		10B072FF77B1425CB1989B53 /* RelWithDebInfo */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
-				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
-				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'", );
-				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				HEADER_SEARCH_PATHS = (/usr/local/include, );
-				INSTALL_PATH = "";
-				OTHER_LDFLAGS = " ";
-				OTHER_REZFLAGS = "";
-				PRODUCT_NAME = ALL_BUILD;
-				SECTORDER_FLAGS = "";
-				SYMROOT = /Users/applekey/Documents/voxel/build;
-				USE_HEADERMAP = NO;
-				WARNING_CFLAGS = ("-Wmost", "-Wno-four-char-constants", "-Wno-unknown-pragmas", "$(inherited)", );
-			};
-			name = RelWithDebInfo;
-		};
-		318CBB71ED544411BC22C516 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
-				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
-				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'", );
-				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				HEADER_SEARCH_PATHS = (/usr/local/include, );
-				INSTALL_PATH = "";
-				OTHER_LDFLAGS = " ";
-				OTHER_REZFLAGS = "";
-				PRODUCT_NAME = ALL_BUILD;
-				SECTORDER_FLAGS = "";
-				SYMROOT = /Users/applekey/Documents/voxel/build;
-				USE_HEADERMAP = NO;
-				WARNING_CFLAGS = ("-Wmost", "-Wno-four-char-constants", "-Wno-unknown-pragmas", "$(inherited)", );
-			};
-			name = Debug;
-		};
-		587690F7D9AC4265A3A57DA1 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ONLY_ACTIVE_ARCH = YES;
-				SDKROOT = /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk;
-				SYMROOT = /Users/applekey/Documents/voxel/build/build;
-			};
-			name = Release;
-		};
-		6A6C1190724544BA9388896A /* MinSizeRel */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
-				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
-				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'", );
-				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				HEADER_SEARCH_PATHS = (/usr/local/include, );
-				INSTALL_PATH = "";
-				OTHER_LDFLAGS = " ";
-				OTHER_REZFLAGS = "";
-				PRODUCT_NAME = ZERO_CHECK;
-				SECTORDER_FLAGS = "";
-				SYMROOT = /Users/applekey/Documents/voxel/build;
-				USE_HEADERMAP = NO;
-				WARNING_CFLAGS = ("-Wmost", "-Wno-four-char-constants", "-Wno-unknown-pragmas", "$(inherited)", );
-			};
-			name = MinSizeRel;
-		};
-		7338332519B64B8B95B2D1D7 /* MinSizeRel */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ONLY_ACTIVE_ARCH = YES;
-				SDKROOT = /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk;
-				SYMROOT = /Users/applekey/Documents/voxel/build/build;
-			};
-			name = MinSizeRel;
-		};
-		76F47566227C400BB86FC8F5 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
-				EXECUTABLE_PREFIX = "";
-				EXECUTABLE_SUFFIX = "";
-				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
-				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'", );
-				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				HEADER_SEARCH_PATHS = (/usr/local/include, );
-				INSTALL_PATH = "";
-				LIBRARY_SEARCH_PATHS = "";
-				OTHER_CPLUSPLUSFLAGS = "    ";
-				OTHER_LDFLAGS = " -Wl,-search_paths_first -Wl,-headerpad_max_install_names  /usr/local/lib/libtbbmalloc.dylib /usr/local/lib/libtbb.dylib";
-				OTHER_REZFLAGS = "";
-				PRODUCT_NAME = voxel;
-				SECTORDER_FLAGS = "";
-				SYMROOT = /Users/applekey/Documents/voxel/build;
-				USE_HEADERMAP = NO;
-				WARNING_CFLAGS = ("-Wmost", "-Wno-four-char-constants", "-Wno-unknown-pragmas", "$(inherited)", );
-			};
-			name = Debug;
-		};
-		874CE020BD5547A698FCB0E4 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ONLY_ACTIVE_ARCH = YES;
-				SDKROOT = /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk;
-				SYMROOT = /Users/applekey/Documents/voxel/build/build;
-			};
-			name = Debug;
-		};
-		87CC4519A35C4E9696566633 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
-				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
-				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'", );
-				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				HEADER_SEARCH_PATHS = (/usr/local/include, );
-				INSTALL_PATH = "";
-				OTHER_LDFLAGS = " ";
-				OTHER_REZFLAGS = "";
-				PRODUCT_NAME = ZERO_CHECK;
-				SECTORDER_FLAGS = "";
-				SYMROOT = /Users/applekey/Documents/voxel/build;
-				USE_HEADERMAP = NO;
-				WARNING_CFLAGS = ("-Wmost", "-Wno-four-char-constants", "-Wno-unknown-pragmas", "$(inherited)", );
-			};
-			name = Release;
-		};
-		8B5476CF9A794181841B07BB /* MinSizeRel */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
-				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
-				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'", );
-				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				HEADER_SEARCH_PATHS = (/usr/local/include, );
-				INSTALL_PATH = "";
-				OTHER_LDFLAGS = " ";
-				OTHER_REZFLAGS = "";
-				PRODUCT_NAME = ALL_BUILD;
-				SECTORDER_FLAGS = "";
-				SYMROOT = /Users/applekey/Documents/voxel/build;
-				USE_HEADERMAP = NO;
-				WARNING_CFLAGS = ("-Wmost", "-Wno-four-char-constants", "-Wno-unknown-pragmas", "$(inherited)", );
-			};
-			name = MinSizeRel;
-		};
-		9267D55F37084955BAF00470 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
-				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
-				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'", );
-				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				HEADER_SEARCH_PATHS = (/usr/local/include, );
-				INSTALL_PATH = "";
-				OTHER_LDFLAGS = " ";
-				OTHER_REZFLAGS = "";
-				PRODUCT_NAME = ZERO_CHECK;
-				SECTORDER_FLAGS = "";
-				SYMROOT = /Users/applekey/Documents/voxel/build;
-				USE_HEADERMAP = NO;
-				WARNING_CFLAGS = ("-Wmost", "-Wno-four-char-constants", "-Wno-unknown-pragmas", "$(inherited)", );
-			};
-			name = Debug;
-		};
-		9483D9E4BF1D493EB618485F /* RelWithDebInfo */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
-				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
-				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'", );
-				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				HEADER_SEARCH_PATHS = (/usr/local/include, );
-				INSTALL_PATH = "";
-				OTHER_LDFLAGS = " ";
-				OTHER_REZFLAGS = "";
-				PRODUCT_NAME = ZERO_CHECK;
-				SECTORDER_FLAGS = "";
-				SYMROOT = /Users/applekey/Documents/voxel/build;
-				USE_HEADERMAP = NO;
-				WARNING_CFLAGS = ("-Wmost", "-Wno-four-char-constants", "-Wno-unknown-pragmas", "$(inherited)", );
-			};
-			name = RelWithDebInfo;
-		};
-		B46FF5B58FBB43ADA321BE6D /* RelWithDebInfo */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ONLY_ACTIVE_ARCH = YES;
-				SDKROOT = /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk;
-				SYMROOT = /Users/applekey/Documents/voxel/build/build;
-			};
-			name = RelWithDebInfo;
-		};
-		B7D4A65559C241A79F6B3BA8 /* RelWithDebInfo */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
-				EXECUTABLE_PREFIX = "";
-				EXECUTABLE_SUFFIX = "";
-				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
-				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
-				GCC_OPTIMIZATION_LEVEL = 2;
-				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'", );
-				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				HEADER_SEARCH_PATHS = (/usr/local/include, );
-				INSTALL_PATH = "";
-				LIBRARY_SEARCH_PATHS = "";
-				OTHER_CPLUSPLUSFLAGS = "       -DNDEBUG  ";
-				OTHER_LDFLAGS = " -Wl,-search_paths_first -Wl,-headerpad_max_install_names  /usr/local/lib/libtbbmalloc.dylib /usr/local/lib/libtbb.dylib";
-				OTHER_REZFLAGS = "";
-				PRODUCT_NAME = voxel;
-				SECTORDER_FLAGS = "";
-				SYMROOT = /Users/applekey/Documents/voxel/build;
-				USE_HEADERMAP = NO;
-				WARNING_CFLAGS = ("-Wmost", "-Wno-four-char-constants", "-Wno-unknown-pragmas", "$(inherited)", );
-			};
-			name = RelWithDebInfo;
-		};
-		C88624A1C1A844DC811DD160 /* Release */ = {
+		09E62CAE9D3744C5806BC900 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
@@ -591,7 +348,7 @@ exit 0";
 				INSTALL_PATH = "";
 				LIBRARY_SEARCH_PATHS = "";
 				OTHER_CPLUSPLUSFLAGS = "    -DNDEBUG  ";
-				OTHER_LDFLAGS = " -Wl,-search_paths_first -Wl,-headerpad_max_install_names  /usr/local/lib/libtbbmalloc.dylib /usr/local/lib/libtbb.dylib";
+				OTHER_LDFLAGS = " -Wl,-search_paths_first -Wl,-headerpad_max_install_names  /usr/local/lib/libtbbmalloc.dylib /usr/local/lib/libtbb.dylib -framework AGL -framework OpenGL /usr/local/lib/libGLEW.dylib /usr/local/lib/libglfw.dylib -framework Cocoa -framework IOKit -framework CoreVideo";
 				OTHER_REZFLAGS = "";
 				PRODUCT_NAME = voxel;
 				SECTORDER_FLAGS = "";
@@ -601,7 +358,104 @@ exit 0";
 			};
 			name = Release;
 		};
-		CCDA6FA31F34437EA17CD97B /* MinSizeRel */ = {
+		1492365B5B914358B8DEBE66 /* RelWithDebInfo */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk;
+				SYMROOT = /Users/applekey/Documents/voxel/build/build;
+			};
+			name = RelWithDebInfo;
+		};
+		202A643351CB434EBBAD60CD /* RelWithDebInfo */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'", );
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (/usr/local/include, );
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = " ";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ZERO_CHECK;
+				SECTORDER_FLAGS = "";
+				SYMROOT = /Users/applekey/Documents/voxel/build;
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("-Wmost", "-Wno-four-char-constants", "-Wno-unknown-pragmas", "$(inherited)", );
+			};
+			name = RelWithDebInfo;
+		};
+		35A5CDDF16DA44C19F4B17C9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'", );
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (/usr/local/include, );
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = " ";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ZERO_CHECK;
+				SECTORDER_FLAGS = "";
+				SYMROOT = /Users/applekey/Documents/voxel/build;
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("-Wmost", "-Wno-four-char-constants", "-Wno-unknown-pragmas", "$(inherited)", );
+			};
+			name = Debug;
+		};
+		3A23720827D94F34B81D73D8 /* RelWithDebInfo */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'", );
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (/usr/local/include, );
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = " ";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ALL_BUILD;
+				SECTORDER_FLAGS = "";
+				SYMROOT = /Users/applekey/Documents/voxel/build;
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("-Wmost", "-Wno-four-char-constants", "-Wno-unknown-pragmas", "$(inherited)", );
+			};
+			name = RelWithDebInfo;
+		};
+		47D2D5CC35A4442E9BBF5336 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				EXECUTABLE_PREFIX = "";
+				EXECUTABLE_SUFFIX = "";
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'", );
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (/usr/local/include, );
+				INSTALL_PATH = "";
+				LIBRARY_SEARCH_PATHS = "";
+				OTHER_CPLUSPLUSFLAGS = "    ";
+				OTHER_LDFLAGS = " -Wl,-search_paths_first -Wl,-headerpad_max_install_names  /usr/local/lib/libtbbmalloc.dylib /usr/local/lib/libtbb.dylib -framework AGL -framework OpenGL /usr/local/lib/libGLEW.dylib /usr/local/lib/libglfw.dylib -framework Cocoa -framework IOKit -framework CoreVideo";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = voxel;
+				SECTORDER_FLAGS = "";
+				SYMROOT = /Users/applekey/Documents/voxel/build;
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("-Wmost", "-Wno-four-char-constants", "-Wno-unknown-pragmas", "$(inherited)", );
+			};
+			name = Debug;
+		};
+		6892A52AD0D54DB69D35F5AB /* MinSizeRel */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
@@ -616,7 +470,7 @@ exit 0";
 				INSTALL_PATH = "";
 				LIBRARY_SEARCH_PATHS = "";
 				OTHER_CPLUSPLUSFLAGS = "    -DNDEBUG  ";
-				OTHER_LDFLAGS = " -Wl,-search_paths_first -Wl,-headerpad_max_install_names  /usr/local/lib/libtbbmalloc.dylib /usr/local/lib/libtbb.dylib";
+				OTHER_LDFLAGS = " -Wl,-search_paths_first -Wl,-headerpad_max_install_names  /usr/local/lib/libtbbmalloc.dylib /usr/local/lib/libtbb.dylib -framework AGL -framework OpenGL /usr/local/lib/libGLEW.dylib /usr/local/lib/libglfw.dylib -framework Cocoa -framework IOKit -framework CoreVideo";
 				OTHER_REZFLAGS = "";
 				PRODUCT_NAME = voxel;
 				SECTORDER_FLAGS = "";
@@ -626,49 +480,206 @@ exit 0";
 			};
 			name = MinSizeRel;
 		};
+		738017AC06764200ADAB7145 /* MinSizeRel */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'", );
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (/usr/local/include, );
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = " ";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ALL_BUILD;
+				SECTORDER_FLAGS = "";
+				SYMROOT = /Users/applekey/Documents/voxel/build;
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("-Wmost", "-Wno-four-char-constants", "-Wno-unknown-pragmas", "$(inherited)", );
+			};
+			name = MinSizeRel;
+		};
+		76298F7ACB724420B6481B2C /* MinSizeRel */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk;
+				SYMROOT = /Users/applekey/Documents/voxel/build/build;
+			};
+			name = MinSizeRel;
+		};
+		7A63762226D3482898D8D569 /* RelWithDebInfo */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				EXECUTABLE_PREFIX = "";
+				EXECUTABLE_SUFFIX = "";
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 2;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'", );
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (/usr/local/include, );
+				INSTALL_PATH = "";
+				LIBRARY_SEARCH_PATHS = "";
+				OTHER_CPLUSPLUSFLAGS = "       -DNDEBUG  ";
+				OTHER_LDFLAGS = " -Wl,-search_paths_first -Wl,-headerpad_max_install_names  /usr/local/lib/libtbbmalloc.dylib /usr/local/lib/libtbb.dylib -framework AGL -framework OpenGL /usr/local/lib/libGLEW.dylib /usr/local/lib/libglfw.dylib -framework Cocoa -framework IOKit -framework CoreVideo";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = voxel;
+				SECTORDER_FLAGS = "";
+				SYMROOT = /Users/applekey/Documents/voxel/build;
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("-Wmost", "-Wno-four-char-constants", "-Wno-unknown-pragmas", "$(inherited)", );
+			};
+			name = RelWithDebInfo;
+		};
+		A32AFC2C42B64DEDBD189FC5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'", );
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (/usr/local/include, );
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = " ";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ALL_BUILD;
+				SECTORDER_FLAGS = "";
+				SYMROOT = /Users/applekey/Documents/voxel/build;
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("-Wmost", "-Wno-four-char-constants", "-Wno-unknown-pragmas", "$(inherited)", );
+			};
+			name = Debug;
+		};
+		B37C4589090449E282DB157B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'", );
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (/usr/local/include, );
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = " ";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ZERO_CHECK;
+				SECTORDER_FLAGS = "";
+				SYMROOT = /Users/applekey/Documents/voxel/build;
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("-Wmost", "-Wno-four-char-constants", "-Wno-unknown-pragmas", "$(inherited)", );
+			};
+			name = Release;
+		};
+		B3840693D92847E7854C4C16 /* MinSizeRel */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'", );
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (/usr/local/include, );
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = " ";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ZERO_CHECK;
+				SECTORDER_FLAGS = "";
+				SYMROOT = /Users/applekey/Documents/voxel/build;
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("-Wmost", "-Wno-four-char-constants", "-Wno-unknown-pragmas", "$(inherited)", );
+			};
+			name = MinSizeRel;
+		};
+		D825D0DB107F40F69AAC1A23 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk;
+				SYMROOT = /Users/applekey/Documents/voxel/build/build;
+			};
+			name = Debug;
+		};
+		E0139A4FD4DF4D17BDB93864 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk;
+				SYMROOT = /Users/applekey/Documents/voxel/build/build;
+			};
+			name = Release;
+		};
+		F96DC450B96E4220BCB923DD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'", );
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (/usr/local/include, );
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = " ";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ALL_BUILD;
+				SECTORDER_FLAGS = "";
+				SYMROOT = /Users/applekey/Documents/voxel/build;
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("-Wmost", "-Wno-four-char-constants", "-Wno-unknown-pragmas", "$(inherited)", );
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		03FC215DA2CC4076B4223EBB /* Build configuration list for PBXNativeTarget "voxel" */ = {
+		4C9D32EE71D746C996A3CAF2 /* Build configuration list for PBXAggregateTarget "ZERO_CHECK" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				76F47566227C400BB86FC8F5 /* Debug */,
-				C88624A1C1A844DC811DD160 /* Release */,
-				CCDA6FA31F34437EA17CD97B /* MinSizeRel */,
-				B7D4A65559C241A79F6B3BA8 /* RelWithDebInfo */,
+				35A5CDDF16DA44C19F4B17C9 /* Debug */,
+				B37C4589090449E282DB157B /* Release */,
+				B3840693D92847E7854C4C16 /* MinSizeRel */,
+				202A643351CB434EBBAD60CD /* RelWithDebInfo */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
 		};
-		8C7BA6878BE840D6B2087C42 /* Build configuration list for PBXAggregateTarget "ALL_BUILD" */ = {
+		86914AC164CE4D10B48226DE /* Build configuration list for PBXProject "voxel" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				318CBB71ED544411BC22C516 /* Debug */,
-				0D14C91043B14B4C952E742A /* Release */,
-				8B5476CF9A794181841B07BB /* MinSizeRel */,
-				10B072FF77B1425CB1989B53 /* RelWithDebInfo */,
+				D825D0DB107F40F69AAC1A23 /* Debug */,
+				E0139A4FD4DF4D17BDB93864 /* Release */,
+				76298F7ACB724420B6481B2C /* MinSizeRel */,
+				1492365B5B914358B8DEBE66 /* RelWithDebInfo */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
 		};
-		D9269FCC43314A59A8F40A4C /* Build configuration list for PBXProject "voxel" */ = {
+		95590D7C691445F584F88596 /* Build configuration list for PBXAggregateTarget "ALL_BUILD" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				874CE020BD5547A698FCB0E4 /* Debug */,
-				587690F7D9AC4265A3A57DA1 /* Release */,
-				7338332519B64B8B95B2D1D7 /* MinSizeRel */,
-				B46FF5B58FBB43ADA321BE6D /* RelWithDebInfo */,
+				A32AFC2C42B64DEDBD189FC5 /* Debug */,
+				F96DC450B96E4220BCB923DD /* Release */,
+				738017AC06764200ADAB7145 /* MinSizeRel */,
+				3A23720827D94F34B81D73D8 /* RelWithDebInfo */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
 		};
-		F97B08B946824515888E0CDB /* Build configuration list for PBXAggregateTarget "ZERO_CHECK" */ = {
+		CEBF02FAC6B04A05821B678B /* Build configuration list for PBXNativeTarget "voxel" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				9267D55F37084955BAF00470 /* Debug */,
-				87CC4519A35C4E9696566633 /* Release */,
-				6A6C1190724544BA9388896A /* MinSizeRel */,
-				9483D9E4BF1D493EB618485F /* RelWithDebInfo */,
+				47D2D5CC35A4442E9BBF5336 /* Debug */,
+				09E62CAE9D3744C5806BC900 /* Release */,
+				6892A52AD0D54DB69D35F5AB /* MinSizeRel */,
+				7A63762226D3482898D8D569 /* RelWithDebInfo */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;

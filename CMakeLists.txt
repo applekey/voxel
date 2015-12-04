@@ -4,20 +4,30 @@ project (voxel)
 
 set( CMAKE_MODULE_PATH "/Users/applekey/Documents/cmakeModules/")
 find_package(TBB)
+find_package(OpenGL REQUIRED)
+find_package(GLEW REQUIRED)
+find_package(GLFW REQUIRED)
 
 
 include_directories(
 ${TBB_INCLUDE_DIRS}
+${OPENGL_INCLUDE_DIRS}
+${GLEW_INCLUDE_DIRS}
+${GLFW_INCLUDE_DIRS}
 	)
 
 set(ALL_LIBS
 ${TBB_LIBRARIES}
+${OPENGL_LIBRARY}
+${GLEW_LIBRARY}
+${GLFW_LIBRARY}
 	)
 
 
-#file(GLOB HEADERS include/*.h)
+file(GLOB HEADERS *.h)
 
 set(PROJECT_HEADERS
+${HEADERS}
 	)
 
 

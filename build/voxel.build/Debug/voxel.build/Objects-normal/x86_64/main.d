@@ -81,4 +81,5 @@ dependencies: /Users/applekey/Documents/voxel/main.cpp \
   /usr/local/include/tbb/internal/_template_helpers.h \
   /usr/local/include/tbb/blocked_range.h \
   /usr/local/include/tbb/tbb_exception.h \
-  /usr/local/include/tbb/tbb_allocator.h
+  /usr/local/include/tbb/tbb_allocator.h \
+  /Users/applekey/Documents/voxel/svo.h

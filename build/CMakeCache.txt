@@ -172,6 +172,36 @@ CMAKE_USE_RELATIVE_PATHS:BOOL=OFF
 // Studio IDE projects all commands are done without /nologo.
 CMAKE_VERBOSE_MAKEFILE:BOOL=OFF
 
+//Path to a file.
+GLEW_INCLUDE_DIR:PATH=/usr/local/include
+
+//Path to a library.
+GLEW_LIBRARY:FILEPATH=/usr/local/lib/libGLEW.dylib
+
+//The directory where GLFW/glfw3.h resides
+GLFW_INCLUDE_DIR:PATH=/usr/local/include
+
+//Cocoa framework for OSX
+GLFW_cocoa_LIBRARY:STRING=-framework Cocoa
+
+//CoreVideo framework for OSX
+GLFW_corevideo_LIBRARY:STRING=-framework CoreVideo
+
+//Path to a library.
+GLFW_glfw_LIBRARY:FILEPATH=/usr/local/lib/libglfw.dylib
+
+//IOKit framework for OSX
+GLFW_iokit_LIBRARY:STRING=-framework IOKit
+
+//Include for OpenGL on OSX
+OPENGL_INCLUDE_DIR:PATH=/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk/System/Library/Frameworks/OpenGL.framework
+
+//OpenGL lib for OSX
+OPENGL_gl_LIBRARY:FILEPATH=/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk/System/Library/Frameworks/OpenGL.framework
+
+//AGL lib for OSX
+OPENGL_glu_LIBRARY:FILEPATH=/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk/System/Library/Frameworks/AGL.framework
+
 //The directory containing a CMake configuration file for TBB.
 TBB_DIR:PATH=TBB_DIR-NOTFOUND
 
@@ -329,8 +359,30 @@ CMAKE_UNAME:INTERNAL=/usr/bin/uname
 CMAKE_USE_RELATIVE_PATHS-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_VERBOSE_MAKEFILE
 CMAKE_VERBOSE_MAKEFILE-ADVANCED:INTERNAL=1
+//Details about finding GLEW
+FIND_PACKAGE_MESSAGE_DETAILS_GLEW:INTERNAL=[/usr/local/include][/usr/local/lib/libGLEW.dylib][v()]
+//Details about finding GLFW
+FIND_PACKAGE_MESSAGE_DETAILS_GLFW:INTERNAL=[/usr/local/include][/usr/local/lib/libglfw.dylib;;-framework Cocoa;-framework IOKit;-framework CoreVideo][v3.1.2()]
+//Details about finding OpenGL
+FIND_PACKAGE_MESSAGE_DETAILS_OpenGL:INTERNAL=[/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk/System/Library/Frameworks/OpenGL.framework][/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk/System/Library/Frameworks/OpenGL.framework][v()]
 //Details about finding TBB
 FIND_PACKAGE_MESSAGE_DETAILS_TBB:INTERNAL=[/usr/local/include][/usr/local/lib/libtbbmalloc.dylib;/usr/local/lib/libtbb.dylib][c ][v4.3()]
+//ADVANCED property for variable: GLEW_INCLUDE_DIR
+GLEW_INCLUDE_DIR-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: GLEW_LIBRARY
+GLEW_LIBRARY-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: GLFW_INCLUDE_DIR
+GLFW_INCLUDE_DIR-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: GLFW_cocoa_LIBRARY
+GLFW_cocoa_LIBRARY-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: GLFW_glfw_LIBRARY
+GLFW_glfw_LIBRARY-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: OPENGL_INCLUDE_DIR
+OPENGL_INCLUDE_DIR-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: OPENGL_gl_LIBRARY
+OPENGL_gl_LIBRARY-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: OPENGL_glu_LIBRARY
+OPENGL_glu_LIBRARY-ADVANCED:INTERNAL=1
 //Stored Xcode object GUID
 PROJECT_voxel_GUID_CMAKE:INTERNAL=547853C15D044B9794C27F9D
 //ADVANCED property for variable: TBB_INCLUDE_DIRS

@@ -11,6 +11,8 @@
 /Applications/CMake.app/Contents/share/cmake-3.3/Modules/Compiler/AppleClang-CXX.cmake\
 /Applications/CMake.app/Contents/share/cmake-3.3/Modules/Compiler/Clang.cmake\
 /Applications/CMake.app/Contents/share/cmake-3.3/Modules/Compiler/GNU.cmake\
+/Applications/CMake.app/Contents/share/cmake-3.3/Modules/FindGLEW.cmake\
+/Applications/CMake.app/Contents/share/cmake-3.3/Modules/FindOpenGL.cmake\
 /Applications/CMake.app/Contents/share/cmake-3.3/Modules/FindPackageHandleStandardArgs.cmake\
 /Applications/CMake.app/Contents/share/cmake-3.3/Modules/FindPackageMessage.cmake\
 /Applications/CMake.app/Contents/share/cmake-3.3/Modules/Platform/Darwin-AppleClang-C.cmake\
@@ -21,6 +23,7 @@
 /Applications/CMake.app/Contents/share/cmake-3.3/Modules/Platform/Darwin-Initialize.cmake\
 /Applications/CMake.app/Contents/share/cmake-3.3/Modules/Platform/Darwin.cmake\
 /Applications/CMake.app/Contents/share/cmake-3.3/Modules/Platform/UnixPaths.cmake\
+/Users/applekey/Documents/cmakeModules/FindGLFW.cmake\
 /Users/applekey/Documents/cmakeModules/FindTBB.cmake\
 /Users/applekey/Documents/voxel/CMakeLists.txt\
 /Users/applekey/Documents/voxel/build/CMakeFiles/3.3.2/CMakeCCompiler.cmake\
