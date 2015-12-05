@@ -39,19 +39,47 @@ public:
     
     void attachPrevNodeToCurrent(struct node * head, std::vector<struct node * > * nodeVec, uint64_t mortonCode )
     {
-        uint64_t mymortonCode;
+        uint64_t mymortonCode = mortonCode;
         for(int i = 7; i>=0 ;i--)
         {
-            mymortonCode = mymortonCode <<1 ;
-            uint64_t code = mymortonCode & (0b10000000);
-            if (code == 1)
+            
+            uint64_t code = mymortonCode & (0b0010000000);
+            if (code == 128)
             {
                 head->children[i] = nodeVec->back();
                 nodeVec->pop_back();
             }
+            mymortonCode = mymortonCode <<1 ;
         }
         assert(nodeVec->empty());
     }
+    
+    
+    void teststrucnode(struct node * head, int & total, int level, int maxLevel)
+    {
+        assert(head->level == level);
+        
+        total ++;
+        
+        if (level == maxLevel)
+        {
+            return;
+        }
+        
+        
+        int newlevel = level + 1;
+        uint64_t mymortonCode = head->elementMortonIndex;
+        for(int i = 7; i >= 0;i--)
+        {
+            uint64_t code = mymortonCode & (0b0010000000);
+            if (code == 128)
+            {
+                teststrucnode(head->children[i],total,newlevel,maxLevel);
+            }
+            mymortonCode = mymortonCode <<1 ;
+        }
+    }
+    
     
     struct node * ReadIn (const char * fileName, int levels)
     {
@@ -64,6 +92,7 @@ public:
         
         while(std::getline(input, line ))
         {
+            std::cout<<line<<'\n';
             // get level
             int level = (int)(line[6]) - '0';
             
@@ -71,12 +100,12 @@ public:
             std::string mortCodeString = line.substr(17);
             uint64_t mortCode = convertCharToMort(mortCodeString);
             
-            if(level == levels) // this is a root node
+            if(level == levels-1) // this is a root node
             {
                 struct node * newNode = new struct node;
                 newNode->level = level;
                 newNode->elementMortonIndex = mortCode;
-                lvls[levels].push_back(newNode);
+                lvls[level].push_back(newNode);
             }
             else //this is a leaf, remove previous nodes
             {
@@ -93,22 +122,8 @@ public:
                 lvls[level].push_back(newNode);
 
             }
-            
-            struct node newNode;
-            newNode.level = level;
-            
-            //attach all previous node's to current level
-            
-            
-            
-            
-            
-            
-            
-            
-            std::cout<<line<<'\n';
         };
-
+        return lvls[0][0];
     }
     
     void OpenFile()

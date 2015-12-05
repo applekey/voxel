@@ -420,8 +420,9 @@ struct voxelOperator {
 int main()
 {
     svo svc;
-    svc.ReadIn("file.txt",7);
-    
+    struct node * head = svc.ReadIn("file.txt",7);
+    int total = 0;
+    svc.teststrucnode(head, total, 0,6);
     return 0;
     
 //    int sscreenSize[3] = {SCREENSIZE,SCREENSIZE,SCREENSIZE};
