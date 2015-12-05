@@ -7,12 +7,13 @@ class render
     
 public:
     
-    void drawCube(int x, int y, int z)
+    void drawCube(int x, int y, int z, int drawLevel)
     {
-        
+        //std::cout<<"x:"<<x<<" y:"<<y<<" z:"<<z<<std::endl;
+        //return;
         glPushMatrix();
-        float factor = 0.125;
-        static float alpha = 10;
+        float factor = 1/pow(2,drawLevel);
+        static float alpha = 00;
         //attempt to rotate cube
         glRotatef(alpha, 0, 1, 0);
         glScalef(factor, factor, factor);
@@ -67,30 +68,44 @@ public:
         glVertex3f(-1.0f, 1.0f, -1.0f);
         
         glEnd();
-        
         glPopMatrix();
         
         
         
     }
     
-    void drawRecuse(struct node * p, int currentLevel, int drawLevel)
+    //http://www.forceflow.be/2013/10/07/morton-encodingdecoding-through-bit-interleaving-implementations/
+    void mortonDecode(uint64_t morton, int& x, int& y, int& z){
+        x = 0;
+        y = 0;
+        z = 0;
+        for (uint64_t i = 0; i < (sizeof(uint64_t) * CHAR_BIT)/3; ++i) {
+            x |= ((morton & (uint64_t( 1ull ) << uint64_t((3ull * i) + 0ull))) >> uint64_t(((3ull * i) + 0ull)-i));
+            y |= ((morton & (uint64_t( 1ull ) << uint64_t((3ull * i) + 1ull))) >> uint64_t(((3ull * i) + 1ull)-i));
+            z |= ((morton & (uint64_t( 1ull ) << uint64_t((3ull * i) + 2ull))) >> uint64_t(((3ull * i) + 2ull)-i));
+        }
+    }
+    
+    void drawRecuse(struct node * p, int currentLevel, int drawLevel, uint64_t currentMorton)
     {
         if (currentLevel == drawLevel)
         {
             int x,y,z;
-            drawCube(x,y,z);
+            mortonDecode(currentMorton,x,y,z);
+            drawCube(x,y,z,drawLevel);
+            return;
         }
-        
+        uint64_t nextLevelMorton = currentMorton<<3;
         
         int newlevel = currentLevel + 1;
         uint64_t mymortonCode = p->elementMortonIndex;
-        for(int i = 7; i >= 0;i--)
+        for(uint64_t i = 8; i >= 1;i--)
         {
             uint64_t code = mymortonCode & (0b0010000000);
             if (code == 128)
             {
-                drawRecuse(p->children[i],newlevel,drawLevel);
+                uint64_t elemMort = nextLevelMorton + i-1;
+                drawRecuse(p->children[i-1],newlevel,drawLevel,elemMort);
             }
             mymortonCode = mymortonCode <<1 ;
         }
@@ -140,7 +155,7 @@ public:
             gluPerspective( 60, (double)windowWidth / (double)windowHeight, 0.1, 100 );
             
             glMatrixMode(GL_MODELVIEW_MATRIX);
-            glTranslatef(0,0,-5);
+            glTranslatef(-1,-2,-5);
             
             glEnable(GL_DEPTH_TEST);
             glEnable(GL_COLOR_MATERIAL);
@@ -163,9 +178,10 @@ public:
             glLightfv(GL_LIGHT1, GL_POSITION, lightPos1);
             
             
-            drawRecuse(head,0,6);
             
-
+            drawRecuse(head,0,level,0);
+            
+            
             
             // Update Screen
             glfwSwapBuffers(window);

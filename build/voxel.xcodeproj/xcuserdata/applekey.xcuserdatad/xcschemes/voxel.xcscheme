@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "13F0926E3A8D4C1FB0124423"
+               BlueprintIdentifier = "D350BEBCCB6248339FCE6011"
                BuildableName = "voxel"
                BlueprintName = "voxel"
                ReferencedContainer = "container:build/voxel.xcodeproj">
@@ -32,7 +32,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "13F0926E3A8D4C1FB0124423"
+            BlueprintIdentifier = "D350BEBCCB6248339FCE6011"
             BuildableName = "voxel"
             BlueprintName = "voxel"
             ReferencedContainer = "container:build/voxel.xcodeproj">
@@ -55,7 +55,7 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "13F0926E3A8D4C1FB0124423"
+            BlueprintIdentifier = "D350BEBCCB6248339FCE6011"
             BuildableName = "voxel"
             BlueprintName = "voxel"
             ReferencedContainer = "container:build/voxel.xcodeproj">
@@ -74,7 +74,7 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "13F0926E3A8D4C1FB0124423"
+            BlueprintIdentifier = "D350BEBCCB6248339FCE6011"
             BuildableName = "voxel"
             BlueprintName = "voxel"
             ReferencedContainer = "container:build/voxel.xcodeproj">

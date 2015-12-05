@@ -21,7 +21,7 @@
 #include "common.h"
 
 
-#define OBJFILE "/Users/applekey/Documents/obj/cone.obj"
+#define OBJFILE "/Users/applekey/Documents/obj/bunny.obj"
 #define SCREENSIZE 128
 
 std::vector<glm::vec3> LoadObjFindAABB(const char * filename, glm::vec3 * aabbLow, glm::vec3 *  aabbHigh)
@@ -428,7 +428,7 @@ int main()
     //svc.teststrucnode(head, total, 0,6);
     
     render rend;
-    rend.draw(head,6);
+    rend.draw(head,7);
     
     return 0;
     
