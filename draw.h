@@ -8,14 +8,14 @@ int myRotation = 0;
 
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
-    if (key == GLFW_KEY_E && action == GLFW_PRESS)
+    if (key == GLFW_KEY_UP  && action == GLFW_PRESS)
     {
         if (myRenderLevel <7)
         {
             myRenderLevel ++;
         }
     }
-    if (key == GLFW_KEY_R && action == GLFW_PRESS)
+    if (key == GLFW_KEY_DOWN && action == GLFW_PRESS)
     {
         if (myRenderLevel >0)
         {
@@ -24,13 +24,14 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
         
     }
     
-    if (key == GLFW_KEY_T && action == GLFW_PRESS)
+    if (key == GLFW_KEY_LEFT && (action == GLFW_REPEAT || action == GLFW_PRESS))
     {
         myRotation +=20;
-        if( myRotation == 360)
-        {
-            myRotation = 0;
-        }
+    }
+    
+    if (key == GLFW_KEY_RIGHT && (action == GLFW_REPEAT || action == GLFW_PRESS))
+    {
+        myRotation -=20;
     }
 }
 
@@ -48,11 +49,13 @@ public:
         int totalLength = pow(2,drawLevel);
         
         
-        float factor = 1/pow(2,drawLevel);
+        float factor = 1/pow(2,drawLevel) * 2.2;
         float alpha = myRotation;
         
         //attempt to rotate cube
+        glRotatef(10, 1, 0, 0);
         glRotatef(alpha, 0, 1, 0);
+        
         glScalef(factor, factor, factor);
         glTranslatef(-totalLength, -totalLength, -totalLength);
         
@@ -63,47 +66,47 @@ public:
         glBegin(GL_QUADS);
         
         //Front
-        glNormal3f(0.0f, 0.0f, 1.0f);
-        //glNormal3f(-1.0f, 0.0f, 1.0f);
+        //glNormal3f(0.0f, 0.0f, 1.0f);
+        glNormal3f(-1.0f, 0.0f, 1.0f);
         glVertex3f(-1.0f, -1.0f, 1.0f);
-        //glNormal3f(1.0f, 0.0f, 1.0f);
+        glNormal3f(1.0f, 0.0f, 1.0f);
         glVertex3f(1.0f, -1.0f, 1.0f);
-        //glNormal3f(1.0f, 0.0f, 1.0f);
+        glNormal3f(1.0f, 0.0f, 1.0f);
         glVertex3f(1.0f, 1.0f, 1.0f);
-        //glNormal3f(-1.0f, 0.0f, 1.0f);
+        glNormal3f(-1.0f, 0.0f, 1.0f);
         glVertex3f(-1.0f, 1.0f, 1.0f);
         
         //Right
-        glNormal3f(1.0f, 0.0f, 0.0f);
-        //glNormal3f(1.0f, 0.0f, -1.0f);
+        //glNormal3f(1.0f, 0.0f, 0.0f);
+        glNormal3f(1.0f, 0.0f, -1.0f);
         glVertex3f(1.0f, -1.0f, -1.0f);
-        //glNormal3f(1.0f, 0.0f, -1.0f);
+        glNormal3f(1.0f, 0.0f, -1.0f);
         glVertex3f(1.0f, 1.0f, -1.0f);
-        //glNormal3f(1.0f, 0.0f, 1.0f);
+        glNormal3f(1.0f, 0.0f, 1.0f);
         glVertex3f(1.0f, 1.0f, 1.0f);
-        //glNormal3f(1.0f, 0.0f, 1.0f);
+        glNormal3f(1.0f, 0.0f, 1.0f);
         glVertex3f(1.0f, -1.0f, 1.0f);
         
         //Back
-        glNormal3f(0.0f, 0.0f, -1.0f);
-        //glNormal3f(-1.0f, 0.0f, -1.0f);
+        //glNormal3f(0.0f, 0.0f, -1.0f);
+        glNormal3f(-1.0f, 0.0f, -1.0f);
         glVertex3f(-1.0f, -1.0f, -1.0f);
-        //glNormal3f(-1.0f, 0.0f, -1.0f);
+        glNormal3f(-1.0f, 0.0f, -1.0f);
         glVertex3f(-1.0f, 1.0f, -1.0f);
-        //glNormal3f(1.0f, 0.0f, -1.0f);
+        glNormal3f(1.0f, 0.0f, -1.0f);
         glVertex3f(1.0f, 1.0f, -1.0f);
-        //glNormal3f(1.0f, 0.0f, -1.0f);
+        glNormal3f(1.0f, 0.0f, -1.0f);
         glVertex3f(1.0f, -1.0f, -1.0f);
         
         //Left
-        glNormal3f(-1.0f, 0.0f, 0.0f);
-        //glNormal3f(-1.0f, 0.0f, -1.0f);
+        //glNormal3f(-1.0f, 0.0f, 0.0f);
+        glNormal3f(-1.0f, 0.0f, -1.0f);
         glVertex3f(-1.0f, -1.0f, -1.0f);
-        //glNormal3f(-1.0f, 0.0f, 1.0f);
+        glNormal3f(-1.0f, 0.0f, 1.0f);
         glVertex3f(-1.0f, -1.0f, 1.0f);
-        //glNormal3f(-1.0f, 0.0f, 1.0f);
+        glNormal3f(-1.0f, 0.0f, 1.0f);
         glVertex3f(-1.0f, 1.0f, 1.0f);
-        //glNormal3f(-1.0f, 0.0f, -1.0f);
+        glNormal3f(-1.0f, 0.0f, -1.0f);
         glVertex3f(-1.0f, 1.0f, -1.0f);
         
         glEnd();
@@ -175,7 +178,8 @@ public:
         glEnable(GL_LIGHT0); //Enable light #0
         glEnable(GL_LIGHT1); //Enable light #1
         glEnable(GL_NORMALIZE); //Automatically normalize normals
-        
+        glEnable(GL_RESCALE_NORMAL);
+        glShadeModel(GL_SMOOTH);
         /* Loop until the user closes the window */
         while (!glfwWindowShouldClose(window))
         {
@@ -194,7 +198,7 @@ public:
             gluPerspective( 60, (double)windowWidth / (double)windowHeight, 0.1, 100 );
             
             glMatrixMode(GL_MODELVIEW_MATRIX);
-            glTranslatef(-0,-1,-5);
+            glTranslatef(-0,-0.0,-6);
             
             glEnable(GL_DEPTH_TEST);
             glEnable(GL_COLOR_MATERIAL);
@@ -202,20 +206,23 @@ public:
             //Add ambient light
             GLfloat ambientColor[] = {0.2f, 0.4f, 0.4f, 1.0f}; //Color(0.2, 0.2, 0.2)
             glLightModelfv(GL_LIGHT_MODEL_AMBIENT, ambientColor);
-            
+            GLfloat specular0[] = {1.0, 1.0, 1.0, 1.0};
             //Add positioned light
             GLfloat lightColor0[] = {0.5f, 0.5f, 0.5f, 1.0f}; //Color (0.5, 0.5, 0.5)
-            GLfloat lightPos0[] = {6.0f, 3.0f, 6.0f, 1.0f}; //Positioned at (4, 0, 8)
+             GLfloat lightPos0[] = {-0.0f, 0.0f, 8.5f, 0.0f}; //Positioned at (4, 0, 8)
             glLightfv(GL_LIGHT0, GL_DIFFUSE, lightColor0);
             glLightfv(GL_LIGHT0, GL_POSITION, lightPos0);
+            glLightfv(GL_LIGHT1, GL_SPECULAR, specular0);
+            
+            
             
             //Add directed light
-            GLfloat lightColor1[] = {1.0f, 0.2f, 0.2f, 1.0f}; //Color (0.5, 0.2, 0.2)
+            GLfloat lightColor1[] = {1.0f, 0.2f, 0.2f, 0.0f}; //Color (0.5, 0.2, 0.2)
             //Coming from the direction (-1, 0.5, 0.5)
-            GLfloat lightPos1[] = {-1.0f, 0.5f, 0.5f, 0.0f};
+            GLfloat lightPos1[] = {-3.0f, 0.0f, 8.5f, 1.0f};
             glLightfv(GL_LIGHT1, GL_DIFFUSE, lightColor1);
             glLightfv(GL_LIGHT1, GL_POSITION, lightPos1);
-            
+            glLightfv(GL_LIGHT1, GL_SPECULAR, specular0);
             
             
             drawRecuse(head,0,myRenderLevel,0);
