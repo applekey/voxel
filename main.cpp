@@ -14,8 +14,11 @@
 #include "tbb/parallel_for.h"
 #include "tbb/blocked_range.h"
 
+
 // project files
 #include "svo.h"
+#include "draw.h"
+#include "common.h"
 
 
 #define OBJFILE "/Users/applekey/Documents/obj/cone.obj"
@@ -421,8 +424,12 @@ int main()
 {
     svo svc;
     struct node * head = svc.ReadIn("file.txt",7);
-    int total = 0;
-    svc.teststrucnode(head, total, 0,6);
+    //int total = 0;
+    //svc.teststrucnode(head, total, 0,6);
+    
+    render rend;
+    rend.draw(head,6);
+    
     return 0;
     
 //    int sscreenSize[3] = {SCREENSIZE,SCREENSIZE,SCREENSIZE};

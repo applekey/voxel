@@ -1,20 +1,6 @@
-struct node
-{
-    int level;
-    uint64_t elementMortonIndex;
-    ////////////////////////////////
-    struct node *  children[8];
-    uint64_t offsets[8];
-};
-
-struct leaf
-{
-    uint64_t linksStartIndex;
-    uint64_t offsets[8];
-};
+#include "common.h"
 
 class svo{
-    unsigned char * svoHead;
     FILE *f;
 public:
     svo()
@@ -92,7 +78,7 @@ public:
         
         while(std::getline(input, line ))
         {
-            std::cout<<line<<'\n';
+            //std::cout<<line<<'\n';
             // get level
             int level = (int)(line[6]) - '0';
             

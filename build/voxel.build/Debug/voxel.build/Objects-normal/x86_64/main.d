@@ -82,4 +82,7 @@ dependencies: /Users/applekey/Documents/voxel/main.cpp \
   /usr/local/include/tbb/blocked_range.h \
   /usr/local/include/tbb/tbb_exception.h \
   /usr/local/include/tbb/tbb_allocator.h \
-  /Users/applekey/Documents/voxel/svo.h
+  /Users/applekey/Documents/voxel/svo.h \
+  /Users/applekey/Documents/voxel/common.h \
+  /Users/applekey/Documents/voxel/draw.h /usr/local/include/GL/glew.h \
+  /usr/local/include/GLFW/glfw3.h
