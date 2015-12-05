@@ -436,10 +436,7 @@ int main()
 //    
 //    
 //    
-//    sv.BuildSVOUnitTest();
-//    
-//    
-//    return 0;
+
     //screen size
     glm::vec3 screenSize(SCREENSIZE,SCREENSIZE,SCREENSIZE);
     

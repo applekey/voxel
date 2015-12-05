@@ -1,10 +1,42 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
-
 #include "common.h"
+
+
+int myRenderLevel = 7;
+int myRotation = 0;
+
+void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
+{
+    if (key == GLFW_KEY_E && action == GLFW_PRESS)
+    {
+        if (myRenderLevel <7)
+        {
+            myRenderLevel ++;
+        }
+    }
+    if (key == GLFW_KEY_R && action == GLFW_PRESS)
+    {
+        if (myRenderLevel >0)
+        {
+            myRenderLevel --;
+        }
+        
+    }
+    
+    if (key == GLFW_KEY_T && action == GLFW_PRESS)
+    {
+        myRotation +=20;
+        if( myRotation == 360)
+        {
+            myRotation = 0;
+        }
+    }
+}
+
 class render
 {
-    
+    float rotation = 0;
 public:
     
     void drawCube(int x, int y, int z, int drawLevel)
@@ -12,11 +44,18 @@ public:
         //std::cout<<"x:"<<x<<" y:"<<y<<" z:"<<z<<std::endl;
         //return;
         glPushMatrix();
+        
+        int totalLength = pow(2,drawLevel);
+        
+        
         float factor = 1/pow(2,drawLevel);
-        static float alpha = 00;
+        float alpha = myRotation;
+        
         //attempt to rotate cube
         glRotatef(alpha, 0, 1, 0);
         glScalef(factor, factor, factor);
+        glTranslatef(-totalLength, -totalLength, -totalLength);
+        
         glColor3f(1.0f, 1.0f, 0.0f);
         
         glTranslatef(x*2,y*2,z*2);
@@ -69,9 +108,6 @@ public:
         
         glEnd();
         glPopMatrix();
-        
-        
-        
     }
     
     //http://www.forceflow.be/2013/10/07/morton-encodingdecoding-through-bit-interleaving-implementations/
@@ -110,6 +146,8 @@ public:
             mymortonCode = mymortonCode <<1 ;
         }
     }
+
+
     
     int draw(struct node * head, int level)
     {
@@ -132,7 +170,7 @@ public:
         
         GLint windowWidth, windowHeight;
         glfwGetWindowSize(window, &windowWidth, &windowHeight);
-        
+        glfwSetKeyCallback(window, key_callback);
         glEnable(GL_LIGHTING); //Enable lighting
         glEnable(GL_LIGHT0); //Enable light #0
         glEnable(GL_LIGHT1); //Enable light #1
@@ -141,6 +179,7 @@ public:
         /* Loop until the user closes the window */
         while (!glfwWindowShouldClose(window))
         {
+            //eerotation +=10;
             // Scale to window size
             GLint windowWidth, windowHeight;
             glfwGetWindowSize(window, &windowWidth, &windowHeight);
@@ -155,7 +194,7 @@ public:
             gluPerspective( 60, (double)windowWidth / (double)windowHeight, 0.1, 100 );
             
             glMatrixMode(GL_MODELVIEW_MATRIX);
-            glTranslatef(-1,-2,-5);
+            glTranslatef(-0,-1,-5);
             
             glEnable(GL_DEPTH_TEST);
             glEnable(GL_COLOR_MATERIAL);
@@ -179,7 +218,7 @@ public:
             
             
             
-            drawRecuse(head,0,level,0);
+            drawRecuse(head,0,myRenderLevel,0);
             
             
             
