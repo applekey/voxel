@@ -306,8 +306,6 @@ struct voxelOperator {
             return false;
         }
         
-        // at this stage we can compute t to find out where
-        // the intersection point is on the line
         float t = f * glm::dot(e2,q);
         
         if (t > 0.00001)
